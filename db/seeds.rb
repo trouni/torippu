@@ -29,7 +29,7 @@ puts 'creating ingredients...'
     Review.new(
       rating: rand(1..3),
       comment: Faker::Hipster.words(4),
-      reviewed:
+      reviewed: user,
       )
   end
 end
