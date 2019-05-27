@@ -1,18 +1,22 @@
 require 'faker'
+EMAIL = %w(trouni@le.com saad@le.com eugene@le.com alex@le.com)
 puts 'deleting boockings'
-# Bocking.destroy_all
+Booking.destroy_all
 puts 'deleting trips'
-# Trip.destroy_all
+Trip.destroy_all
+puts 'deleting users'
+User.destroy_all
 puts 'deleting reviews'
 # Review.destroy_all
-puts 'creating ingredients...'
-
-5.times do
+puts 'deleting Review...'
+i = 0
+4.times do
   user = User.create!(
-    name: Faker::Name.unique.name,
-    email: Faker::Internet.email,
+
+    email: EMAIL[i],
     password: 'secret',
     )
+  i += 1
   2.times do
     trip_in_days = rand(1..5)
     Trip.create!(
@@ -27,18 +31,18 @@ puts 'creating ingredients...'
 
   end
 
-    4.times do
-    Review.create!(
-      rating: rand(1..3),
-      comment: Faker::Hipster.words(4),
-      reviewed: user,
-      )
-  end
+  #   4.times do
+  #   Review.create!(
+  #     rating: rand(1..3),
+  #     comment: Faker::Hipster.words(4),
+  #     reviewed: user,
+  #     )
+  # end
 end
 
 Trip.all.each do |trip|
   Booking.create!(
-    passenger: User.where.not(id: trip.driver.id).sample
+    passenger: User.where.not(id: trip.driver.id).sample,
     trip: trip
     )
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_084123) do
+ActiveRecord::Schema.define(version: 2019_05_27_083951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,16 +22,6 @@ ActiveRecord::Schema.define(version: 2019_05_27_084123) do
     t.datetime "updated_at", null: false
     t.index ["passenger_id"], name: "index_bookings_on_passenger_id"
     t.index ["trip_id"], name: "index_bookings_on_trip_id"
-  end
-
-  create_table "cars", force: :cascade do |t|
-    t.string "model"
-    t.integer "number_seats"
-    t.string "type"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_cars_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -52,8 +42,10 @@ ActiveRecord::Schema.define(version: 2019_05_27_084123) do
     t.string "end_point"
     t.date "start_date"
     t.date "end_date"
+    t.bigint "driver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["driver_id"], name: "index_trips_on_driver_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -73,7 +65,7 @@ ActiveRecord::Schema.define(version: 2019_05_27_084123) do
 
   add_foreign_key "bookings", "trips"
   add_foreign_key "bookings", "users", column: "passenger_id"
-  add_foreign_key "cars", "users"
   add_foreign_key "reviews", "bookings"
   add_foreign_key "reviews", "users", column: "reviewed_id"
+  add_foreign_key "trips", "users", column: "driver_id"
 end
