@@ -24,12 +24,21 @@ puts 'creating ingredients...'
       seats_available: rand(1..3),
       driver: user,
       )
+
   end
+
     4.times do
-    Review.new(
+    Review.create!(
       rating: rand(1..3),
       comment: Faker::Hipster.words(4),
       reviewed: user,
       )
   end
+end
+
+Trip.all.each do |trip|
+  Booking.create!(
+    passenger: User.where.not(id: trip.driver.id).sample
+    trip: trip
+    )
 end
