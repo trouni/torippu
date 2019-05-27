@@ -45,4 +45,5 @@ Trip.all.each do |trip|
     passenger: User.where.not(id: trip.driver.id).sample,
     trip: trip
     )
+
 end
