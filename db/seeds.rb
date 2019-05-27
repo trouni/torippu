@@ -22,7 +22,7 @@ puts 'creating ingredients...'
       end_point: Faker::Address.city,
       description: 'blabla-trip',
       seats_available: rand(1..3),
-      user: user,
+      driver: user,
       )
   end
     4.times do
