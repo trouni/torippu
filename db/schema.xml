@@ -113,7 +113,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="782" y="198" name="bookings">
+<table x="780" y="226" name="bookings">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -132,7 +132,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="173" y="138" name="cars">
+<table x="173" y="138" name="car_models">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
