@@ -10,11 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_074512) do
+ActiveRecord::Schema.define(version: 2019_05_27_083951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "passenger_id"
+    t.bigint "trip_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["passenger_id"], name: "index_bookings_on_passenger_id"
+    t.index ["trip_id"], name: "index_bookings_on_trip_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "booking_id"
+    t.bigint "reviewed_id"
+    t.string "comment"
+    t.float "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_reviews_on_booking_id"
+    t.index ["reviewed_id"], name: "index_reviews_on_reviewed_id"
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.string "description"
+    t.integer "seats_available"
+    t.string "start_point"
+    t.string "end_point"
+    t.date "start_date"
+    t.date "end_date"
+    t.bigint "driver_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["driver_id"], name: "index_trips_on_driver_id"
+  end
+  
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
