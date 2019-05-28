@@ -1,9 +1,12 @@
 <div class="card-trip shadow bg-white rounded-lg m-3">
   <div class="row d-flex justify-content-between m-0 p-4">
     <div class="card-left">
-      <div class="card-journey">
-        <h3 class="card-journey-origin">From: Le Wagon Tokyo, Meguro-ku, Tokyo</h3>
-        <h3 class="card-journey-destination">To: Osaka</h3>
+      <div class="card-journey d-flex flex-wrap">
+        <h3 class="card-journey-origin mr-3"><p class="m-0"><small><%#= trip.start_time %></small></p><%= trip.start_point %></h3>
+        <div class="d-flex align-items-center">
+          <i class="fas fa-arrow-circle-right mr-3"></i>
+          <h3 class="card-journey-destination"><p class="m-0"><small><%#= trip.end_time %></small></p><%= trip.end_point %></h3>
+        </div>
       </div>
       <div class="card-tags">
         <i class="fas fa-venus-double"></i><i class="fas fa-smoking-ban"></i>
@@ -11,11 +14,12 @@
     </div>
     <div class="card-right d-flex flex-column justify-content-between text-right">
       <div class="card-driver">
-        Trouni Tiet
+        <%= trip.driver.username %>
+        <%#= cl_image_tag trip.driver.photo, class: "avatar" %>
         <%= image_tag "http://source.unsplash.com/200x200", class: "avatar" %>
       </div>
-      <h4 class="card-price">
-        ¥3500
+      <h4 class="card-price m-0">
+        <%#= trip.price %>
       </h4>
     </div>
   </div>
