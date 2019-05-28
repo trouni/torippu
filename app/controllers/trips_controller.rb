@@ -12,7 +12,7 @@ class TripsController < ApplicationController
 
   def set_trip
     @trip = Trip.find(params[:id])
-    @booking = Booking.where(trip_id: params[:id])
+    @bookings = Booking.where(trip_id: params[:id])
     authorize @trip
   end
 end
