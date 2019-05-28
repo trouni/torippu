@@ -2,7 +2,7 @@
   color: white;
   background-size: cover;
   background-position: center;
-  height: 40vh;
+  min-height: 35vh;
 }
 
 .banner h1 {
@@ -19,8 +19,7 @@
   }
 }
 
-.banner p {
+.banner h2 {
   font-size: 2em;
   color: white;
-  // text-shadow: 1px 1px 3px rgba(255,255,255,0.2);
 }

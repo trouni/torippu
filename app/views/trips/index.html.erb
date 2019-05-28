@@ -1,9 +1,22 @@
-<%= render "banner" %>
+<%= render partial: "search_banner", locals: {banner_url: "banners/search.jpg"} %>
 
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 col-sm-8">
-      <%= render partial: "trips/cards", locals: { trips: @trips } %>
+
+      <div class="text-center m-3">
+        <p class="m-0">Driving to <%= params[:to] %>?</p>
+        <%= link_to new_trip_path, class: "btn btn-outline-primary rounded mb-3" do %>
+        <i class="fas fa-plus-circle"></i> Add your trip to TORIPPU
+        <% end %>
+      </div>
+
+      <% if @trips.empty? %>
+        <p class="font-italic text-center">No trips available for your selection. <%= link_to "List your trip", new_trip_path %> or see the suggestions below.</p>
+        <%= render partial: "trips/cards", locals: { trips: Trip.all.order(:start_time) } %>
+      <% else %>
+        <%= render partial: "trips/cards", locals: { trips: @trips } %>
+      <% end %>
     </div>
   </div>
 </div>

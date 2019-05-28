@@ -1,0 +1,7 @@
+<h3>Details</h3>
+<p><%= trip.description %></p>
+
+<%= render "trips/tags/female_only" %>
+<%= render "trips/tags/no_smoking" %>
+
+<%= render partial: "user/card", locals: { user: trip.driver } %>

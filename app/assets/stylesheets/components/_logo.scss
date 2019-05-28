@@ -1,0 +1,19 @@
+.logo {
+  color: white;
+  font-family: $logo-font;
+  i {
+    font-size: 3em;
+  }
+  p {
+    font-size: 1.2em;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.logo.small {
+  font-size: 1em;
+  i {
+    font-size: 1.3em;
+  }
+}
