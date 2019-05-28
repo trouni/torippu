@@ -1,0 +1,36 @@
+<div class="card-trip shadow bg-white rounded-lg m-3">
+  <div class="row d-flex justify-content-between m-0 p-4">
+    <div class="card-left">
+      <div class="card-booking d-flex flex-wrap">
+        <h3 class="card-booking-origin mr-3">
+          <%="#{booking.passenger.last_name}, #{booking.passenger.last_name}" %>
+        </h3>
+      </div>
+      <div class="card-tags">
+          <h3 class="card-booking-email"><%= booking.passenger.email%></h3>
+        <i class="fas fa-venus-double"></i><i class="fas fa-smoking-ban"></i>
+      </div>
+      <div class="card-booking-managment d-flex">
+        <% if booking.approved == false && current_user == @trip.driver%>
+         <div class="btn btn-success m-3">approve</div>
+        <% end %>
+          <div class="btn btn-warning m-3">change</div>
+          <div class="btn btn-danger m-3">cancel</div>
+      </div>
+    </div>
+    <div class="card-right d-flex flex-column justify-content-between text-right">
+      <div class="card-passenger">
+        <%= cl_image_tag booking.passenger.photo, class: "avatar" %>
+        <h3>rating</h3>
+      </div>
+      <div class="card-booking-status">
+        <% if booking.approved %>
+          <h3>approved for:</h3>
+        <% else %>
+          <h3>applied for</h3>
+        <% end %>
+      </div>
+      <div class="card-booking-seats"><h3>1 seat</h3></div>
+    </div>
+  </div>
+</div>

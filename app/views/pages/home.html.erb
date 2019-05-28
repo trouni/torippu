@@ -1,0 +1,14 @@
+<%= render "trips/searchform" %>
+
+<div class="home-banner vh-100" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_url "banner.jpg" %>);">
+  <div class="container">
+    <h1><strong>Torippu</strong></h1>
+    <p>Create the ride of your life!</p>
+    <form id="home-search" method="get" action="/trips" class="simple_form search">
+      <div class="search-form-control form-group">
+        <input type="text" name="destination" class="form-control">
+        <button type="submit" class="btn btn-flat">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
