@@ -2,9 +2,9 @@ class BookingsController < ApplicationController
   def create
     @trip = Trip.find(params[:trip_id])
     @booking = Booking.new(booking_params)
-    authorize @booking
     @booking.passenger = current_user
     @booking.trip = @trip
+    authorize @booking
     if @booking.save
       redirect_to trip_path(@trip)
     else

@@ -3,9 +3,9 @@ class BookingPolicy < ApplicationPolicy
     def resolve
       scope.all
     end
+  end
 
-    def create?
-      record.user == user
-    end
+  def create?
+    record.passenger == user
   end
 end
