@@ -10,6 +10,8 @@ class TripsController < ApplicationController
   end
 
   def show
+    @booking = Booking.new
+    @booking.trip = @trip
   end
 
   private

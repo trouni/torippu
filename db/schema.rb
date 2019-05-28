@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_055839) do
     t.bigint "booking_id"
     t.bigint "user_id"
     t.string "comment"
-    t.integer "rating"
+    t.float "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["booking_id"], name: "index_reviews_on_booking_id"

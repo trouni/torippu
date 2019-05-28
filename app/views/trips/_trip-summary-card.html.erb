@@ -1,0 +1,5 @@
+<%= render partial: "trips/card", locals: { trip: trip } %>
+<%= simple_form_for [@trip, @booking] do |f| %>
+  <%= f.input :number_seats%>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>

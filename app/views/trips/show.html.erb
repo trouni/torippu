@@ -32,3 +32,7 @@
     </div>
   </div>
 </div>
+
+<%= simple_form_for [@trip, @booking] do |f| %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
