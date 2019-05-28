@@ -9,8 +9,12 @@
 <% elsif Booking.where(passenger: current_user, trip: @trip).length > 0%>
   <%= render partial: "trips/card_bookings", locals: { booking: @bookings.where(passenger: current_user).first } %>
 <% else %>
-  <div class="card-align-items-center m-3">
-    <div class="btn btn-primary btn-lg">apply for trip</div>
-  </div>
+<div class="card-align-items-center m-3">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal">
+  Apply for trip
+</button>
+<%= render "trip-summary-card" %>
 <% end %>
 </div>
+
+
