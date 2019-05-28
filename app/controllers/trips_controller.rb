@@ -1,5 +1,10 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show]
+
+  def index
+    @trips = policy_scope(Trip)
+  end
+
   def show
   end
 
