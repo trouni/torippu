@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_055839) do
+ActiveRecord::Schema.define(version: 2019_05_28_080200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_055839) do
     t.bigint "trip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "seats_number", default: 1
     t.index ["passenger_id"], name: "index_bookings_on_passenger_id"
     t.index ["trip_id"], name: "index_bookings_on_trip_id"
   end
@@ -28,7 +29,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_055839) do
     t.bigint "booking_id"
     t.bigint "user_id"
     t.string "comment"
-    t.float "rating"
+    t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["booking_id"], name: "index_reviews_on_booking_id"
