@@ -2,11 +2,7 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show]
 
   def index
-    if params[:destination].present?
-      @trips = Trip.where(end_point: params[:destination])
-    else
-      @trips = Trip.all
-    end
+    @trips = policy_scope(Trip)
   end
 
   def show
