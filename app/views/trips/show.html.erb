@@ -17,12 +17,12 @@
           </div>
           <div class="driver-view">
             <h3>Bookings for the trip:</h3>
-              <% @booking.each do |line|%>
+              <% @bookings.each do |booking|%>
             <div class="d-flex flex-row">
             <div class="p-2">photo</div>
             <div class="p-2">
-              <h4> Name: <%=  "#{line.passenger.first_name}, #{line.passenger.first_name}"%></h4>
-              <h5>Email: <%= "#{line.passenger.email} => #{}" %></h5>
+              <h4> Name: <%=  "#{booking.passenger.first_name}, #{booking.passenger.first_name}"%></h4>
+              <h5>Email: <%= "#{booking.passenger.email} => #{}" %></h5>
             </div>
             <div class="p-2">
               <h4><%=%>rating</h4>
