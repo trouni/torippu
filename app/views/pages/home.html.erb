@@ -1,16 +1,18 @@
 <%= render "trips/searchform" %>
 
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_url "banner.jpg" %>);">
-  <div class="container">
-    <h1><strong>Torippu</strong></h1>
-    <p>Create the ride of your life!</p>
-    <form novalidate="novalidate" class="simple_form search" style = "width: 500px" action="/" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
-      <div class="search-form-control form-group">
-        <input class="form-control string required" placeholder="Where are you going?" type="text" name="search[query]" id="search_query" />
-        <button name="button" type="submit" class="btn btn-flat">
-        <i class="fas fa-search"></i> Search
-      </button>
-      </div>
-    </form>
+<div class="home-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_url "banner.jpg" %>);">
+  <div class="container d-flex align-content-center justify-content-center">
+    <div>
+      <h1><strong>Torippu</strong></h1>
+      <p>Create the ride of your life!</p>
+      <form novalidate="novalidate" class="simple_form search" style = "width: 500px" action="/" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+        <div class="search-form-control form-group">
+          <input class="form-control string required" placeholder="Where are you going?" type="text" name="search[query]" id="search_query" />
+          <button name="button" type="submit" class="btn btn-flat">
+          <i class="fas fa-search"></i> Search
+        </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
