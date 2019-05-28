@@ -2,14 +2,13 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show]
 
   def index
-    if params[:destination]
-      destination = params[:destination]
-      origin = params[:origin] || "Tokyo"
-      date = params[:date]
-      @trips = policy_scope(Trip).where(end_point: destination, start_point: origin)
-    else
-      @trips = policy_scope(Trip)
-    end
+    destination = params[:destination]
+    origin = params[:origin]
+    date = params[:date]
+    @trips = policy_scope(Trip)
+    @trips = @trips.where(end_point: destination) if destination
+    @trips = @trips.where(start_point: origin) if origin
+    @trips = @trips.where(start_date: date) if date
   end
 
   def show
