@@ -1,0 +1,26 @@
+.card-trip {
+  height: 200px;
+
+  h3 {
+    font-size: 24px;
+  }
+
+  .card-journey i {
+    font-size: 1.5em;
+  }
+
+  .card-tags {
+    font-size: 24px;
+  }
+
+  .card-tags i {
+    margin-right: 5px;
+  }
+}
+
+.cards-container {
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}

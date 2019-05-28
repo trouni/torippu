@@ -1,0 +1,11 @@
+<div class="cards-container">
+  <% trips_by_date = trips.group_by { |trip| trip.start_date } %>
+  <% trips_by_date.keys.sort.each do |date| %>
+    <h3 class="text-center"><%= date.strftime("%e %b %Y") %></h3>
+    <% trips_by_date[date].each do |trip| %>
+      <%= link_to trip_path(trip) do %>
+        <%= render partial: "trips/card", locals: { trip: trip } %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
