@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :reviews
 
   def trips
+    # Trip.joins(:bookings).where(passenger_id: id).or(Trip.joins(:bookings).where(driver_id: id))
     trips_as_passenger + trips_as_driver
   end
 end
