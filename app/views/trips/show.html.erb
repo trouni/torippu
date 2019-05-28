@@ -1,13 +1,16 @@
+
 <div class="container">
 <%= render partial: "trips/card", locals: { trip: @trip } %>
-<% if current_user.email == 'alex@le.com' %>
-<div><h2 class="text-center">Bookings for the trip: </h2></div>
-<% @bookings.each do |booking| %>
-    <%= render partial: "trips/card_bookings", locals: { booking: booking } %>
-<% end %>
+<% if current_user ==  @trip.driver #'alex@le.com'%>
+  <div><h2 class="text-center">Bookings for the trip: </h2></div>
+  <% @bookings.each do |booking| %>
+      <%= render partial: "trips/card_bookings", locals: { booking: booking } %>
+  <% end %>
+<% elsif Booking.where(passenger: current_user, trip: @trip).length > 0%>
+  <%= render partial: "trips/card_bookings", locals: { booking: @bookings.where(passenger: current_user).first } %>
 <% else %>
-<div class="card-align-items-center m-3">
-  <div class="btn btn-primary btn-lg">apply for trip</div>
-</div>
+  <div class="card-align-items-center m-3">
+    <div class="btn btn-primary btn-lg">apply for trip</div>
+  </div>
 <% end %>
 </div>

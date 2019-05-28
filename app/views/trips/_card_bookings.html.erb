@@ -11,14 +11,11 @@
         <i class="fas fa-venus-double"></i><i class="fas fa-smoking-ban"></i>
       </div>
       <div class="card-booking-managment d-flex">
-        <% if booking.passenger.email == 'saad@le.com' %>
-        <div class="card-booking-approvment m-3">
-          <div class="btn btn-success">approve</div>
-        </div>
+        <% if booking.approved == false && current_user == @trip.driver%>
+         <div class="btn btn-success m-3">approve</div>
         <% end %>
-        <div class="card-booking-cancel m-3">
-          <div class="btn btn-danger">cancel</div>
-        </div>
+          <div class="btn btn-warning m-3">change</div>
+          <div class="btn btn-danger m-3">cancel</div>
       </div>
     </div>
     <div class="card-right d-flex flex-column justify-content-between text-right">
@@ -27,8 +24,13 @@
         <h3>rating</h3>
       </div>
       <div class="card-booking-status">
-        <h3>approved</h3>
+        <% if booking.approved %>
+          <h3>approved for:</h3>
+        <% else %>
+          <h3>applied for</h3>
+        <% end %>
       </div>
+      <div class="card-booking-seats"><h3>1 seat</h3></div>
     </div>
   </div>
 </div>
