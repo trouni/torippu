@@ -1,6 +1,8 @@
 .card-trip {
+  height: 200px;
+
   h3 {
-    font-size: 18px;
+    font-size: 24px;
   }
 
   .card-journey i {
@@ -13,5 +15,12 @@
 
   .card-tags i {
     margin-right: 5px;
+  }
+}
+
+.cards-container {
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 }
