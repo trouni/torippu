@@ -7,11 +7,13 @@
 <% end %>
 <% else %>
 <div class="card-align-items-center m-3">
-  <div class="btn btn-primary btn-lg">apply for trip</div>
-</div>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal">
+  Apply for trip
+</button>
+
+<%= render "trip-summary-card" %>
+
 <% end %>
 </div>
 
-<%= simple_form_for [@trip, @booking] do |f| %>
-  <%= f.submit class: 'btn btn-primary' %>
-<% end %>
+
