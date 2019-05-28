@@ -12,6 +12,6 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit( :approved)
+    params.require(:booking).permit(:approved)
   end
 end
