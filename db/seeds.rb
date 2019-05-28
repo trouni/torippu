@@ -1,34 +1,62 @@
 require 'faker'
-EMAIL = %w(trouni@le.com saad@le.com eugene@le.com alex@le.com)
-puts 'deleting boockings'
+
+CITIES = %w[Tokyo Osaka Kyoto Kobe Fukuoka]
+
+USERS = [
+  {
+    username: "trouni",
+    email: "trouni@le.com",
+    photo: "https://avatars3.githubusercontent.com/u/34345789?v=4",
+    password: "secret",
+  },
+  {
+    username: "saad",
+    email: "saad@le.com",
+    photo: "https://avatars0.githubusercontent.com/u/21337523?v=4",
+    password: "secret",
+  },
+  {
+    username: "eugene",
+    email: "eugene@le.com",
+    photo: "https://avatars1.githubusercontent.com/u/49116295?v=4",
+    password: "secret",
+  },
+  {
+    username: "alex",
+    email: "alex@le.com",
+    photo: "https://avatars0.githubusercontent.com/u/48198772?v=4",
+    password: "secret",
+  },
+]
+puts 'deleting bookings'
 Booking.destroy_all
 puts 'deleting trips'
 Trip.destroy_all
 puts 'deleting users'
 User.destroy_all
-puts 'deleting reviews'
+# puts 'deleting reviews'
 # Review.destroy_all
-puts 'deleting Review...'
-i = 0
-4.times do
-  user = User.create!(
 
-    email: EMAIL[i],
-    password: 'secret',
-    )
-  i += 1
-  2.times do
-    trip_in_days = rand(1..5)
+USERS.each do |user_hash|
+  user = User.create!(user_hash)
+  user.remote_photo_url = user_hash[:photo]
+  user.save!
+
+  rand(2..10).times do
+    start_time = DateTime.now + rand(1..30) # start date between now and 1 month from now
+    end_time = start_time + rand(1..18) / 24.0 # trip duration between 1 and 18 hours
     Trip.create!(
-      start_date: Date.today + trip_in_days,
-      end_date: Date.today + trip_in_days,
-      start_point: Faker::Address.city,
-      end_point: Faker::Address.city,
-      description: 'blabla-trip',
+      start_time: start_time,
+      end_time: end_time,
+      start_date: start_time.to_date,
+      end_date: end_time.to_date,
+      start_point: CITIES.sample,
+      end_point: CITIES.sample,
+      description: Faker::TvShows::HowIMetYourMother.quote,
       seats_available: rand(1..3),
       driver: user,
-      )
-
+      price: rand(1..10) * 500
+    )
   end
 
   #   4.times do
@@ -41,9 +69,10 @@ i = 0
 end
 
 Trip.all.each do |trip|
-  Booking.create!(
-    passenger: User.where.not(id: trip.driver.id).sample,
-    trip: trip
+  rand(1..trip.seats_available).times do |variable|
+    Booking.create!(
+      passenger: User.where.not(id: trip.driver.id).sample,
+      trip: trip
     )
-
+  end
 end
