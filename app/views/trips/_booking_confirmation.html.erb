@@ -1,0 +1,16 @@
+<div>
+  <h2> <%= @trip.description %></h2>
+  <div class="card-journey d-flex flex-wrap">
+        <h3 class="card-journey-origin mr-3"><p class="m-0"><small><%= @trip.start_time.strftime("%H:%M") %></small></p><%= @trip.start_point %></h3>
+        <div class="d-flex align-items-center">
+          <i class="fas fa-arrow-circle-right mr-3"></i>
+          <h3 class="card-journey-destination"><p class="m-0"><small><%= @trip.end_time.strftime("%H:%M") %></small></p><%= @trip.end_point %></h3>
+        </div>
+  </div>
+  <div class="d-flex justify-content-center">
+  <%= simple_form_for [@trip, @booking] do |f| %>
+    <%= f.input :number_seats%>
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
+  </div>
+</div>
