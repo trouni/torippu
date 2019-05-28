@@ -1,0 +1,25 @@
+form#trips-search {
+  label {
+    font-size: 12px;
+    margin: 0;
+    margin-left: 1em;
+  }
+  input {
+    border-radius: 0;
+  }
+  input:focus {
+    box-shadow: none;
+  }
+  input[id='from'] {
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  input[id='to'] {
+    border-right: none;
+  }
+  input[id='date'] {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+}

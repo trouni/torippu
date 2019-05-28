@@ -1,6 +1,19 @@
-<%= simple_form_for :search, method: :get do |f| %>
-  <%= f.input :origin %>
-  <%= f.input :destination %>
-
-  <%= f.submit %>
-<% end %>
+<form id="trips-search" method="get" action="/trips" class="simple_form search">
+  <div class="form-row">
+    <div class="col-lg-4 mb-3 px-0">
+      <label for="from">From</label>
+      <input type="text" id="from" name="from" class="form-control" placeholder="Leaving from" value="<%= params[:origin] %>">
+    </div>
+    <div class="col-lg-4 mb-3 px-0">
+      <label for="to">To</label>
+      <input type="text" id="to" name="to" class="form-control" placeholder="Going to" value="<%= params[:destination] %>">
+    </div>
+    <div class="col-lg-4 mb-3 px-0">
+      <label for="date">When</label>
+      <input type="date" id="date" name="when" class="form-control" value="<%= Date.today %>">
+    </div>
+  </div>
+  <div class="form-row text-center">
+    <button type="submit" class="btn btn-flat col-12 col-lg-6 mx-auto">Search</button>
+  </div>
+</form>
