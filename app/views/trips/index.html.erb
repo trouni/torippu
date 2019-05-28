@@ -1,7 +1,8 @@
+<%= render "banner" %>
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 col-sm-8">
-      <%= render 'form_search' %>
       <%= render partial: "trips/cards", locals: { trips: @trips } %>
     </div>
   </div>

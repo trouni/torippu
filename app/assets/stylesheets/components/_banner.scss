@@ -1,0 +1,26 @@
+.banner {
+  color: white;
+  background-size: cover;
+  background-position: center;
+  height: 40vh;
+}
+
+.banner h1 {
+  margin: 0;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 3em;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .banner h1 {
+    text-align: center;
+  }
+}
+
+.banner p {
+  font-size: 2em;
+  color: white;
+  // text-shadow: 1px 1px 3px rgba(255,255,255,0.2);
+}

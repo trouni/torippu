@@ -1,10 +1,10 @@
 <form id="trips-search" method="get" action="/trips" class="simple_form search">
   <div class="form-row">
-    <div class="col-lg-4 mb-3 px-0">
+    <div class="col-sm-6 col-lg-4 mb-3 px-0">
       <label for="from">From</label>
       <input type="text" id="from" name="from" class="form-control" placeholder="Leaving from" value="<%= params[:origin] %>">
     </div>
-    <div class="col-lg-4 mb-3 px-0">
+    <div class="col-sm-6 col-lg-4 mb-3 px-0">
       <label for="to">To</label>
       <input type="text" id="to" name="to" class="form-control" placeholder="Going to" value="<%= params[:destination] %>">
     </div>
