@@ -12,10 +12,18 @@
       </div>
       <div class="card-booking-managment d-flex">
         <% if booking.approved == false && current_user == @trip.driver%>
-         <div class="btn btn-success m-3">approve</div>
+         <div class="btn btn-primary m-3">
+            <%= link_to 'approve',  trip_booking_path(booking.trip, booking)%>
+            <%= render 'form', booking: booking %>
+         </div>
         <% end %>
-          <div class="btn btn-warning m-3">change</div>
-          <div class="btn btn-danger m-3">cancel</div>
+        <% if policy(booking).destroy? %>
+          <div class="btn btn-danger m-3">
+            <%= link_to 'cancel', booking_path(booking),
+                                  method: :delete,
+                                  data: { confirm: "Are you sure?" }%>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="card-right d-flex flex-column justify-content-between text-right">
@@ -25,12 +33,12 @@
       </div>
       <div class="card-booking-status">
         <% if booking.approved %>
-          <h3>approved for:</h3>
+          <h3>No. of <span class="card-approved">approved</span> seats:</h3>
         <% else %>
-          <h3>applied for</h3>
+          <h3>No. of <span class="card-applied">applied</span> seats:</h3>
         <% end %>
       </div>
-      <div class="card-booking-seats"><h3>1 seat</h3></div>
+      <div class="card-booking-seats"><h3><%= booking.seats_number%></h3></div>
     </div>
   </div>
 </div>

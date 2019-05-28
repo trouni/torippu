@@ -1,0 +1,9 @@
+<%= simple_form_for(booking) do |f| %>
+  <div class="form-inputs">
+  <% f.input :approved, as: :hidden, :input_html => {value: true} %>
+  <%= f.input_field :seats_number %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

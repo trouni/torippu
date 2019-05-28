@@ -1,4 +1,5 @@
 class BookingsController < ApplicationController
+  before_action :set_booking, only: [:destroy, :update]
   def create
     @trip = Trip.find(params[:trip_id])
     @booking = Booking.new(booking_params)
@@ -12,7 +13,25 @@ class BookingsController < ApplicationController
     end
   end
 
+  def update
+    @booking.update(booking_params)
+    redirect_to trip_path(trip)
+  end
+
+  def destroy
+    # record.user == current_user
+    @booking.delete
+    redirect_to trip_path(@booking.trip)
+  end
+
+  private
+
   def booking_params
-    params.require(:booking).permit(:approved)
+    params.require(:booking).permit(:seats_number, :approved)
+  end
+
+  def set_booking
+    @booking = Booking.find(params[:id])
+    authorize @booking
   end
 end
