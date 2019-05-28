@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2019_05_27_083951) do
     t.datetime "updated_at", null: false
     t.index ["driver_id"], name: "index_trips_on_driver_id"
   end
-
+  
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -63,9 +63,4 @@ ActiveRecord::Schema.define(version: 2019_05_27_083951) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "bookings", "trips"
-  add_foreign_key "bookings", "users", column: "passenger_id"
-  add_foreign_key "reviews", "bookings"
-  add_foreign_key "reviews", "users", column: "reviewed_id"
-  add_foreign_key "trips", "users", column: "driver_id"
 end
