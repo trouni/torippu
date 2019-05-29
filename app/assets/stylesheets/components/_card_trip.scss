@@ -1,4 +1,7 @@
-.card-trip .driver-icon {
+.card-trip {
+  background-color: white;
+
+  .driver-icon {
   position: relative;
   z-index: 1;
   // &:after {
@@ -16,4 +19,13 @@
   //   right: -1.5rem;
   //   z-index: -1;
   // }
+  }
+}
+
+.card-trip.booking-approved {
+  background-color: $seagreen-translucent;
+}
+
+.card-trip.booking-pending {
+  background-color: $yellow-translucent;
 }

@@ -2,7 +2,7 @@ class User::TripsController < ApplicationController
   def index
     # @trips = TripPolicy::User.new(current_user, User).resolve
     @trips = policy_scope(Trip, policy_scope_class: TripPolicy::User)
-    @upcoming_trips = policy_scope(Trip, policy_scope_class: TripPolicy::User).where("start_date >= '#{Date.today.strftime("%Y-%m-%d")}'")
-    @past_trips = policy_scope(Trip, policy_scope_class: TripPolicy::User).where("start_date < '#{Date.today.strftime("%Y-%m-%d")}'")
+    @upcoming_trips = @trips.where("start_date >= '#{Date.today.strftime("%Y-%m-%d")}'")
+    @past_trips = @trips.where("start_date < '#{Date.today.strftime("%Y-%m-%d")}'")
   end
 end

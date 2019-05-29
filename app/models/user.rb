@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   def trips
     # Trip.joins(:bookings).where(passenger_id: id).or(Trip.where(driver_id: id))
-    Trip.where(driver_id: id)
-    trips_as_passenger + trips_as_driver
+    # trips_as_passenger + trips_as_driver
+    Trip.joins(:bookings).where("bookings.passenger_id = #{id}").or(Trip.joins(:bookings).where(driver_id: id))
   end
 end

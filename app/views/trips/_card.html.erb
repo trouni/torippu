@@ -1,4 +1,8 @@
-<div class="card-trip border bg-white my-3 m-md-3">
+<div class="card-trip border my-3 m-md-3
+  <% if trip.booking?(current_user) %>
+    <%= trip.approved_passenger?(current_user) ? ' booking-approved' : ' booking-pending' %>
+  <% end %>
+">
   <div class="row d-flex justify-content-between m-0 p-4 h-100">
     <div class="card-left d-flex flex-column justify-content-between">
       <div class="card-journey d-flex flex-wrap">
