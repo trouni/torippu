@@ -3,23 +3,32 @@
 <div class="container pb-5">
   <%= render partial: "trips/card", locals: { trip: @trip } %>
 
+  <% if current_user ==  @trip.driver %>
+    <div>
+      <h2 class="text-center">Bookings for the trip: </h2>
+    </div>
+    <% @bookings.each do |booking| %>
+      <%= render partial: "trips/card_bookings_driver", locals: { booking: booking } %>
+    <% end %>
+  <% else %>
+
   <div class="row mt-5">
+
     <div class="col-12 col-md-6 col-lg-8">
       <%= render partial: "trips/details", locals: { trip: @trip } %>
     </div>
+
     <div class="col-12 col-md-6 col-lg-4">
-      <% if current_user ==  @trip.driver %>
-        <div><h2 class="text-center">Bookings for the trip: </h2></div>
-        <% @bookings.each do |booking| %>
-            <%= render partial: "trips/card_bookings", locals: { booking: booking } %>
-        <% end %>
-      <% elsif Booking.where(passenger: current_user, trip: @trip).length > 0%>
-        <%= render partial: "bookings/card_status", locals: { booking: @bookings.where(passenger: current_user).first } %>
+
+      <% if Booking.where(passenger: current_user, trip: @trip).length > 0 %>
+        <%= render partial: "trips/card_bookings", locals: { booking: @bookings.where(passenger: current_user).first } %>
       <% else %>
         <%= render partial: "bookings/cart", locals: { trip: @trip, booking: @booking } %>
       <% end %>
     </div>
+
   </div>
+  <% end %>
 </div>
 
 

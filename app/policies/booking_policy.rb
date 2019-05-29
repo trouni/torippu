@@ -9,6 +9,10 @@ class BookingPolicy < ApplicationPolicy
     record.passenger == user
   end
 
+  def update?
+    true
+  end  
+  
   def destroy?
     record.passenger == user
   end
