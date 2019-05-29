@@ -1,20 +1,25 @@
+<%= render partial: "shared/banner_category", locals: { title: "Trip summary", banner_url: 'https://source.unsplash.com/collection/4894155/1600x900' } %>
 
-<div class="container">
-<%= render partial: "trips/card", locals: { trip: @trip } %>
-<% if current_user ==  @trip.driver #'alex@le.com'%>
-  <div><h2 class="text-center">Bookings for the trip: </h2></div>
-  <% @bookings.each do |booking| %>
-      <%= render partial: "trips/card_bookings", locals: { booking: booking } %>
-  <% end %>
-<% elsif Booking.where(passenger: current_user, trip: @trip).length > 0%>
-  <%= render partial: "trips/card_bookings", locals: { booking: @bookings.where(passenger: current_user).first } %>
-<% else %>
-<div class="card-align-items-center m-3">
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal">
-  Apply for trip
-</button>
-<%= render "trip-summary-card" %>
-<% end %>
+<div class="container pb-5">
+  <%= render partial: "trips/card", locals: { trip: @trip } %>
+
+  <div class="row mt-5">
+    <div class="col-12 col-md-6 col-lg-8">
+      <%= render partial: "trips/details", locals: { trip: @trip } %>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
+      <% if current_user ==  @trip.driver %>
+        <div><h2 class="text-center">Bookings for the trip: </h2></div>
+        <% @bookings.each do |booking| %>
+            <%= render partial: "trips/card_bookings", locals: { booking: booking } %>
+        <% end %>
+      <% elsif Booking.where(passenger: current_user, trip: @trip).length > 0%>
+        <%= render partial: "trips/card_bookings", locals: { booking: @bookings.where(passenger: current_user).first } %>
+      <% else %>
+        <%= render partial: "bookings/cart", locals: { trip: @trip, booking: Booking.new } %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 

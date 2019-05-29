@@ -1,8 +1,14 @@
-
-<div class="navbar navbar-expand-sm navbar-light navbar-torripu bg-white">
+<div class="navbar navbar-expand-sm navbar-light navbar-torippu fixed-top">
   <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "logo.jpg" %>
-    <% end %>
+    <%#= image_tag "logo.jpg" %>
+    <div class="logo d-flex align-items-center">
+      <i class="fas fa-car mr-2"></i>
+      <div class="logo-text">
+        <p>TORIPPU</p>
+        <p>トリップ</p>
+      </div>
+    </div>
+  <% end %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -13,7 +19,7 @@
     <ul class="navbar-nav ml-auto">
       <% if user_signed_in? %>
         <li class="nav-item active">
-          <%= link_to new_trip_path, class: "nav-link btn" do %>
+          <%= link_to new_trip_path, class: "btn btn-outline-light mr-3" do %>
             <i class="fas fa-plus-circle"></i> List a new trip
           <% end %>
         </li>

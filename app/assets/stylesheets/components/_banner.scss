@@ -1,0 +1,25 @@
+.banner {
+  color: white;
+  background-size: cover;
+  background-position: center;
+  min-height: 35vh;
+}
+
+.banner h1 {
+  margin: 0;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 3em;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .banner h1 {
+    text-align: center;
+  }
+}
+
+.banner h2 {
+  font-size: 2em;
+  color: white;
+}

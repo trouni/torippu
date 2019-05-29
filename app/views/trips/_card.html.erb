@@ -1,4 +1,4 @@
-<div class="card-trip shadow bg-white rounded my-3 m-md-3">
+<div class="card-trip border bg-white my-3 m-md-3">
   <div class="row d-flex justify-content-between m-0 p-4 h-100">
     <div class="card-left d-flex flex-column justify-content-between">
       <div class="card-journey d-flex flex-wrap">
@@ -15,7 +15,7 @@
     <div class="card-right d-flex flex-column justify-content-between text-right">
       <div class="card-driver">
         <%= trip.driver.username %>
-        <%= cl_image_tag trip.driver.photo, class: "avatar-large" %>
+        <%= cl_image_tag trip.driver.photo, gravity: "faces", crop: "fill", class: "avatar-large" %>
       </div>
       <h4 class="card-price m-0">
         ¥<%= trip.price %>

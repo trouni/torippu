@@ -1,0 +1,17 @@
+<div class="booking-cart border">
+  <div class="row">
+    <div class="mx-5 py-3 border-bottom w-100">
+      <h3 class="m-0">¥<%= trip.price %> <span>per seat</span></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="mx-5 py-3 w-100">
+      <%= simple_form_for booking do |f| %>
+          <%= f.input :seats_number, label: "Number of seats" %>
+      <% end %>
+    </div>
+    <div class="mx-5 pb-3 w-100">
+      <div class="btn btn-primary w-100">Make a booking request</div>
+    </div>
+  </div>
+</div>
