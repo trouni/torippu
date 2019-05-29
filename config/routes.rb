@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   namespace :user do
     resources :trips, only: :index
   end
+  resources :bookings, only: :destroy
 end
