@@ -6,12 +6,10 @@
   </div>
   <div class="row">
     <div class="mx-5 py-3 w-100">
-      <%= simple_form_for booking do |f| %>
+      <%= simple_form_for booking, url: trip_bookings_path(trip) do |f| %>
           <%= f.input :seats_number, label: "Number of seats" %>
+          <%= f.submit "Make a booking request", class: "btn btn-primary w-100" %>
       <% end %>
-    </div>
-    <div class="mx-5 pb-3 w-100">
-      <div class="btn btn-primary w-100">Make a booking request</div>
     </div>
   </div>
 </div>
