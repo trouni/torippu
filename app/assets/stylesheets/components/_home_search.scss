@@ -25,12 +25,13 @@
   color: white;
   padding: 8px 24px;
   border-radius: 4px;
-  background: $green;
+  background: $seagreen;
+  opacity: 0.8;
   transition: background 0.3s ease;
 }
 
 .btn-flat:hover {
-  background: $gray;
+  opacity: 1;
   color: white;
 }
 
