@@ -9,17 +9,17 @@
   <div class="d-flex flex-column justify-content-around py-3">
     <!-- <div class="row justify-content-around"> -->
       <%= simple_form_for [booking.trip, booking] do |f| %>
-        <%= f.input :approved, as: :hidden, value: :true %>
+        <%= f.input :approved, as: :hidden, input_html: { value: :true } %>
         <%#= f.submit class: 'btn btn-primary' do %>
-        <%= button_tag type: "submit", class: "btn btn-outline-success px-5" do %>
+        <%= f.submit "Approve", class: "btn btn-outline-success px-5" do %>
           <i class="fas fa-thumbs-up"></i></i> Approve <%= booking.passenger.username %>'s request ?
           <% end %>
         <% end %>
 
       <%= simple_form_for [booking.trip, booking] do |f| %>
-      <%= f.input :approved, as: :hidden, value: :false %>
+      <%= f.input :approved, as: :hidden, input_html: { value: :false } %>
       <%#= f.submit class: 'btn btn-primary' do %>
-      <%= button_tag type: "submit", class: "btn btn-outline-danger px-5" do %>
+      <%= f.submit "Deny", class: "btn btn-outline-danger px-5" do %>
         <i class="fas fa-thumbs-up"></i></i> Reject <%= booking.passenger.username %>'s request ?
         <% end %>
       <% end %>
