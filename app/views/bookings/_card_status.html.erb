@@ -7,9 +7,9 @@
         </div>
         <div class="card-grid-right">
          <% if booking.approved %>
-           <h5 >approved</h5>
+           <h5 >APPROVED</h5>
          <% else %>
-           <h5>applied</h5>
+           <h5>PENDING</h5>
          <% end %>
         </div>
       </div>
@@ -19,7 +19,7 @@
     <div class="mx-5 py-3 w-100">
       <div class="card-grid-2">
         <div class="card-grid-left">
-          <h5>No. of seats:</h5>
+          <p>Number of seats:</p>
         </div>
         <div class="card-grid-right">
           <h5 class="m-0"><%= booking.seats_number %></h5>

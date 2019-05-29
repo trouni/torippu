@@ -1,11 +1,15 @@
-<div class="card-trip border bg-white my-3 m-md-3">
+<div class="card-trip border my-3 m-md-3
+  <% if trip.booking?(current_user) %>
+    <%= trip.approved_passenger?(current_user) ? ' booking-approved' : ' booking-pending' %>
+  <% end %>
+">
   <div class="row d-flex justify-content-between m-0 p-4 h-100">
     <div class="card-left d-flex flex-column justify-content-between">
       <div class="card-journey d-flex flex-wrap">
-        <h3 class="card-journey-origin mr-3"><p class="m-0"><small><%= trip.start_time.strftime("%H:%M") %></small></p><%= trip.start_point %></h3>
+        <div class="card-journey-origin mr-3"><p class="m-0"><%= trip.start_time.strftime("%H:%M") %></p><h3><%= trip.start_point %></h3></div>
         <div class="d-flex align-items-center">
           <i class="fas fa-arrow-circle-right mr-3"></i>
-          <h3 class="card-journey-destination"><p class="m-0"><small><%= trip.end_time.strftime("%H:%M") %></small></p><%= trip.end_point %></h3>
+          <div class="card-journey-destination"><p class="m-0"><%= trip.end_time.strftime("%H:%M") %></p><h3><%= trip.end_point %></h3></div>
         </div>
       </div>
       <div class="card-tags">
@@ -14,8 +18,12 @@
     </div>
     <div class="card-right d-flex flex-column justify-content-between text-right">
       <div class="card-driver">
-        <%= trip.driver.username %>
-        <%= cl_image_tag trip.driver.photo, gravity: "faces", crop: "fill", class: "avatar-large" %>
+        <% if current_user == trip.driver %>
+          <i class="fas fa-car fa-3x driver-icon"></i>
+        <% else %>
+          <%= trip.driver.username %>
+          <%= cl_image_tag trip.driver.photo, gravity: "faces", crop: "fill", class: "avatar-large" %>
+        <% end %>
       </div>
       <h4 class="card-price m-0">
         ¥<%= trip.price %>
