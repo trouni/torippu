@@ -1,0 +1,44 @@
+<div class="booking-cart border">
+  <div class="row">
+    <div class="mx-5 py-3 border-bottom w-100">
+      <div class="card-grid-2">
+        <div class="card-grid-left">
+          <h5>Status of booking:</h5>
+        </div>
+        <div class="card-grid-right">
+         <% if booking.approved %>
+           <h5 >approved</h5>
+         <% else %>
+           <h5>applied</h5>
+         <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="mx-5 py-3 w-100">
+      <div class="card-grid-2">
+        <div class="card-grid-left">
+          <h5>No. of seats:</h5>
+        </div>
+        <div class="card-grid-right">
+          <h5 class="m-0"><%= booking.seats_number %></h5>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="mx-5 py-3 w-100">
+      <% if policy(booking).destroy? %>
+        <div>
+        <%= link_to 'cancel', booking_path(booking),
+                              method: :delete,
+                              data: { confirm: "Are you sure?" },
+                              class:"btn btn-danger w-100"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

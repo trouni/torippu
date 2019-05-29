@@ -1,0 +1,14 @@
+.card-applied{
+  color: $light-gray;
+}
+
+.card-approved{
+  color: $seagreen;
+
+}
+
+.card-grid-2 {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-gap: 8px;
+}

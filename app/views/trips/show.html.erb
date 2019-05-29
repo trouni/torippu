@@ -14,7 +14,7 @@
             <%= render partial: "trips/card_bookings", locals: { booking: booking } %>
         <% end %>
       <% elsif Booking.where(passenger: current_user, trip: @trip).length > 0%>
-        <%= render partial: "trips/card_bookings", locals: { booking: @bookings.where(passenger: current_user).first } %>
+        <%= render partial: "bookings/card_status", locals: { booking: @bookings.where(passenger: current_user).first } %>
       <% else %>
         <%= render partial: "bookings/cart", locals: { trip: @trip, booking: @booking } %>
       <% end %>
