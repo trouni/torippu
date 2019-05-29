@@ -5,7 +5,7 @@ CITIES = %w[Tokyo Osaka Kyoto Kobe Fukuoka]
 USERS = [
   {
     username: "trouni",
-    email: "trouni@le.com",
+    email: "trouni@me.com",
     photo: "https://avatars3.githubusercontent.com/u/34345789?v=4",
     password: "secret",
   },
@@ -43,7 +43,7 @@ USERS.each do |user_hash|
   user.save!
 
   rand(2..10).times do
-    start_time = DateTime.now + rand(1..30) # start date between now and 1 month from now
+    start_time = DateTime.now + rand(1..30) + rand # start date between now and 1 month from now
     end_time = start_time + rand(1..18) / 24.0 # trip duration between 1 and 18 hours
     Trip.create!(
       start_time: start_time,
