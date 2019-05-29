@@ -1,0 +1,19 @@
+.card-trip .driver-icon {
+  position: relative;
+  z-index: 1;
+  // &:after {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   right: 0;
+  //   border-color: transparent;
+  //   border-style: solid;
+  //   border-top-right-radius: 5px;
+  //   border-width: 1em;
+  //   border-right-color: $primary;
+  //   border-top-color: $primary;
+  //   top: -1.5rem;
+  //   right: -1.5rem;
+  //   z-index: -1;
+  // }
+}

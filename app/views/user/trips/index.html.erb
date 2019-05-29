@@ -1,0 +1,20 @@
+<%= render partial: "shared/banner_category", locals: { title: "My Trips", banner_url: 'banners/mytrips' } %>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-8">
+      <h3>Upcoming trips</h3>
+      <% if @past_trips.empty? %>
+        <p class="font-italic text-center">You currently have no upcoming trips.</p>
+      <% else %>
+        <%= render partial: "trips/cards", locals: { trips: @upcoming_trips } %>
+      <% end %>
+      <h3>Past trips</h3>
+      <% if @past_trips.empty? %>
+        <p class="font-italic text-center">You have no past trips.</p>
+      <% else %>
+        <%= render partial: "trips/cards", locals: { trips: @past_trips } %>
+      <% end %>
+    </div>
+  </div>
+</div>
