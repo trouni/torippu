@@ -10,7 +10,7 @@ export default class extends Controller {
       countries: ['jp']
     }
     this.inputAddressTargets.forEach( (target) => {
-      places({ container: this.inputAddressTarget }).configure(placesOptions)
+      places({ container: target }).configure(placesOptions)
     });
   }
 }
