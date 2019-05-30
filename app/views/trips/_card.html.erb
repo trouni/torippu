@@ -1,4 +1,4 @@
-<div class="card-trip border my-3 m-md-3
+<div class="card-trip border
   <% if trip.booking?(current_user) %>
     <%= trip.approved_passenger?(current_user) ? ' booking-approved' : ' booking-pending' %>
   <% end %>
