@@ -6,6 +6,7 @@ class TripsController < ApplicationController
 
     filter_by_date(params[:date])
     filter_by_journey(origin: params[:from], destination: params[:to])
+
   end
 
   def show
@@ -28,6 +29,8 @@ class TripsController < ApplicationController
       render :new
     end
   end
+
+
 
   private
 

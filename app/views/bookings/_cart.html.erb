@@ -1,13 +1,14 @@
 <div class="booking-cart border">
   <div class="row">
     <div class="mx-5 py-3 border-bottom w-100">
-      <h3 class="m-0">¥<%= trip.price %> <span>per seat</span></h3>
+      <h3 class="m-0">¥<%= trip.price %> <span>per seat</span> </h3>
     </div>
   </div>
   <div class="row">
     <div class="mx-5 py-3 w-100">
+      <h3> <%=  trip.seats_remain%> <span> seats remaining</span></h3>
       <%= simple_form_for [booking.trip, booking] do |f| %>
-          <%= f.input :seats_number, label: "Number of seats" %>
+          <%= f.input :seats_number, label: "Number of seats", input_html: { min: 1, max: trip.seats_remain } %>
           <%= f.submit "Make a booking request", class: "btn btn-primary w-100" %>
       <% end %>
     </div>
