@@ -31,7 +31,27 @@ class TripsController < ApplicationController
     @booking.trip = @trip
   end
 
+  def new
+    @trip = Trip.new
+    authorize @trip
+  end
+
+  def create
+    @trip = Trip.new(trip_params)
+    @trip.driver = current_user
+    authorize @trip
+    if @trip.save
+      redirect_to trip_path(@trip)
+    else
+      render :new
+    end
+  end
+
   private
+
+  def trip_params
+    params.require(:trip).permit(:description, :seats_available, :start_point, :end_point, :start_time, :end_time, :price)
+  end
 
   def set_trip
     @trip = Trip.find(params[:id])
