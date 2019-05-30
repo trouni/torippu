@@ -10,20 +10,11 @@ class TripsController < ApplicationController
 
     #create coordinates for start
     # @start_markers = @trips.map do |trip|
+
     # {
     #   lat: trip.start_lat,
     #   lng: trip.start_lng
     # }
-
-    # #create coordinates for end
-    # # @end_markers = @trips.map do |trip|
-    # # {
-    # #   lat: trip.end_lat,
-    # #   lng: trip.end_lng
-    # # }
-
-    # end
-
   end
 
   def show
@@ -46,6 +37,8 @@ class TripsController < ApplicationController
       render :new
     end
   end
+
+
 
   private
 
