@@ -1,16 +1,17 @@
 
-
-<div class="row d-flex my-5 mx-0 py-1 justify-content-center align-content-center border">
-  <div class="col-8 col-md-6 col-lg-8 justify-content-center">
-    <%= simple_form_for [@trip] do |f| %>
-            <%= f.input :description%>
-            <%= f.input :seats_available%>
-            <%= f.input :price%>
-            <%= f.input :start_point%>
-            <%= f.input :end_point%>
-            <%= f.input :start_time%>
-            <%= f.input :end_time%>
-            <%= f.submit class: 'btn btn-primary' %>
-            <% end %>
-</div>
+<div class="row mt-5">
+  <div class="row d-flex my-5 mx-0 py-1 justify-content-center align-content-center border">
+    <div class="col-8 col-md-6 col-lg-8 justify-content-center">
+      <%= simple_form_for [@trip] do |f| %>
+              <%= f.input :description%>
+              <%= f.input :seats_available%>
+              <%= f.input :price%>
+              <%= f.input :start_point%>
+              <%= f.input :end_point%>
+              <%= f.input :start_time%>
+              <%= f.input :end_time%>
+              <%= f.submit class: 'btn btn-primary' %>
+              <% end %>
+    </div>
+  </div>
 </div>
