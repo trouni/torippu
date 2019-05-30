@@ -7,7 +7,15 @@ class Trip < ApplicationRecord
   geocoded_by :end_point, latitude: :end_lat, longitude: :end_lng
   # after_validation :geocode, if: :will_save_change_to_end_point?
   after_validation :geocode_endpoints
+  
+  def start_date
+    start_time.to_date
+  end
 
+  def end_date
+    end_time.to_date
+  end
+  
   def booking?(user)
     bookings.each do |booking|
       return true if booking.passenger == user
@@ -24,7 +32,6 @@ class Trip < ApplicationRecord
 
   private
 
-  # To enable Geocoder to works with multiple locations
   def geocode_endpoints
     if end_point_changed?
       geocoded = Geocoder.search(end_point).first
