@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_081143) do
+ActiveRecord::Schema.define(version: 2019_05_30_031219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,14 +27,16 @@ ActiveRecord::Schema.define(version: 2019_05_28_081143) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.bigint "booking_id"
-    t.bigint "user_id"
     t.string "comment"
     t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["booking_id"], name: "index_reviews_on_booking_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
+    t.bigint "trip_id"
+    t.bigint "reviewee_id"
+    t.bigint "reviewer_id"
+    t.index ["reviewee_id"], name: "index_reviews_on_reviewee_id"
+    t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
+    t.index ["trip_id"], name: "index_reviews_on_trip_id"
   end
 
   create_table "trips", force: :cascade do |t|
@@ -71,6 +73,8 @@ ActiveRecord::Schema.define(version: 2019_05_28_081143) do
 
   add_foreign_key "bookings", "trips"
   add_foreign_key "bookings", "users", column: "passenger_id"
-  add_foreign_key "reviews", "bookings"
+  add_foreign_key "reviews", "trips"
+  add_foreign_key "reviews", "users", column: "reviewee_id"
+  add_foreign_key "reviews", "users", column: "reviewer_id"
   add_foreign_key "trips", "users", column: "driver_id"
 end
