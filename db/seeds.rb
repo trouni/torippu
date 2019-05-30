@@ -33,15 +33,16 @@ USERS = [
     password: "secret",
   },
 ]
-puts 'deleting bookings'
+puts 'Deleting bookings...'
 Booking.destroy_all
-puts 'deleting trips'
+puts 'Deleting trips...'
 Trip.destroy_all
-puts 'deleting users'
+puts 'Deleting users...'
 User.destroy_all
 # puts 'deleting reviews'
 # Review.destroy_all
 
+puts 'Creating users and trips...'
 USERS.each do |user_hash|
   user = User.create!(user_hash)
   user.remote_photo_url = user_hash[:photo]
@@ -71,6 +72,7 @@ USERS.each do |user_hash|
   # end
 end
 
+puts 'Creating bookings...'
 Trip.all.each do |trip|
   rand(1..trip.seats_available).times do |variable|
     Booking.create!(
