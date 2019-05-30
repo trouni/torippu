@@ -4,11 +4,9 @@ class TripsController < ApplicationController
   def index
     destination = params[:to]
     origin = params[:from]
-    date = params[:date]
     @trips = policy_scope(Trip)
     @trips = @trips.where(end_point: destination) if destination
     @trips = @trips.where(start_point: origin) if origin
-    @trips = @trips.where(start_date: date) if date
   end
 
   def show
