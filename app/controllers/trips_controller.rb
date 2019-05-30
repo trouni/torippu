@@ -4,8 +4,8 @@ class TripsController < ApplicationController
   def index
     @trips = policy_scope(Trip)
 
+    filter_by_date(params[:date])
     filter_by_journey(origin: params[:from], destination: params[:to])
-    # filter_by_date(params[:date])
   end
 
   def show
@@ -32,11 +32,13 @@ class TripsController < ApplicationController
   private
 
   def filter_by_date(date = '')
-    @trips = @trips.where('start_time = ?', date) if date.present?
+    date_time = DateTime.parse(date)
+    @trips = @trips.where('start_time >= ? AND start_time < ?', date_time, date_time + 3) if date.present?
   end
 
   def filter_by_journey(destination: '', origin: '')
     if origin.present? && destination.present?
+      # @trips = @trips.near(destination, 30, latitude: :end_lat, longitude: :end_lng).near(origin, 30, latitude: :start_lat, longitude: :start_lng)
       @trips = @trips.near(destination, 30, latitude: :end_lat, longitude: :end_lng) & @trips.near(origin, 30, latitude: :start_lat, longitude: :start_lng)
     elsif origin.present? || destination.present?
       @trips = @trips.near(destination, 30, latitude: :end_lat, longitude: :end_lng) + @trips.near(origin, 30, latitude: :start_lat, longitude: :start_lng)
