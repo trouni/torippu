@@ -48,8 +48,6 @@ USERS.each do |user_hash|
     Trip.create!(
       start_time: start_time,
       end_time: end_time,
-      start_date: start_time.to_date,
-      end_date: end_time.to_date,
       start_point: CITIES.sample,
       end_point: CITIES.sample,
       description: Faker::TvShows::HowIMetYourMother.quote,
