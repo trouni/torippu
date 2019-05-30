@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_081143) do
+ActiveRecord::Schema.define(version: 2019_05_30_021503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 2019_05_28_081143) do
     t.bigint "trip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "approved", default: false
     t.integer "seats_number", default: 1
+    t.boolean "approved", default: false
     t.index ["passenger_id"], name: "index_bookings_on_passenger_id"
     t.index ["trip_id"], name: "index_bookings_on_trip_id"
   end
@@ -42,14 +42,16 @@ ActiveRecord::Schema.define(version: 2019_05_28_081143) do
     t.integer "seats_available"
     t.string "start_point"
     t.string "end_point"
-    t.date "start_date"
-    t.date "end_date"
     t.bigint "driver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer "price", default: 0
+    t.float "start_lat"
+    t.float "start_lng"
+    t.float "end_lat"
+    t.float "end_lng"
     t.index ["driver_id"], name: "index_trips_on_driver_id"
   end
 

@@ -1,16 +1,16 @@
-<form id="trips-search" method="get" action="/trips" class="simple_form search">
+<form id="trips-search" data-controller="places" method="get" action="/trips" class="simple_form search">
   <div class="form-row">
     <div class="col-sm-6 col-lg-4 mb-3 px-0">
       <label for="from">From</label>
-      <input type="text" id="from" name="from" class="form-control" placeholder="Leaving from" value="<%= params[:from] %>">
+      <input type="text" id="from" name="from" class="form-control" placeholder="Leaving from" value="<%= params[:from] %>" data-target="places.inputAddress">
     </div>
     <div class="col-sm-6 col-lg-4 mb-3 px-0">
       <label for="to">To</label>
-      <input type="text" id="to" name="to" class="form-control" placeholder="Going to" value="<%= params[:to] %>">
+      <input type="text" id="to" name="to" class="form-control" placeholder="Going to" value="<%= params[:to] %>" data-target="places.inputAddress">
     </div>
     <div class="col-lg-4 mb-3 px-0">
       <label for="date">When</label>
-      <input type="date" id="date" name="when" class="form-control" value="<%= Date.today %>">
+      <input type="date" id="date" name="date" class="form-control" value="<%= params[:date] %>" optional>
     </div>
   </div>
   <div class="form-row text-center">

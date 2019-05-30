@@ -1,1 +1,39 @@
-<%= render "trip-summary-card" %>
+<%= render partial: "new_banner" %>
+
+<div class="p-5">
+  <div class="row my-5 mx-3 justify-content-center">
+    <div class="col-7 col-md-5 col-lg-7 mt-3">
+
+        <div class=" justify-content-center">
+          <%= simple_form_for [@trip] do |f| %>
+                  <div class="m-2">
+                    <p class="m-0"><strong>Pick-up and drop-off</strong></p>
+                    <div class="border p-1">
+                      <%= f.input :start_point, placeholder: 'Tokyo'%>
+                      <%= f.input :end_point, placeholder: 'Kyoto'%>
+                    </div>
+                  </div>
+                 <div class="m-2">
+                  <p class="m-0"><strong>Date & time</strong></p>
+                  <div class="border p-1">
+                  <%= f.input :start_time%>
+                  <%= f.input :end_time%>
+                  </div>
+                </div>
+                 <div class="m-2">
+                  <p class="m-0"><strong>Description</strong></p>
+                  <div class="border p-1">
+                  <%= f.input :description, placeholder: 'Tell us your stroy'%>
+                  <%= f.input :seats_available, collection: 1..10 %>
+                  <%= f.input :price, hint: 'Cheap hein ;)'%>
+                  </div>
+                </div>
+                  <%= f.submit "Let's ride!", class: 'btn btn-primary ml-2'  %>
+                  <% end %>
+        </div>
+    </div>
+    <div class="col-4 mt-3 d-flex  justify-content-center align-content-center border ml-5">
+      <h2>put the map and other details here</h2>
+    </div>
+  </div>
+</div>

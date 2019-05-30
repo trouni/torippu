@@ -1,4 +1,4 @@
-<div id="home-banner" data-controller="home" class="banner vh-100" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_path "banners/fun.jpg" %>);">
+<div id="home-banner" data-controller="home places" class="banner vh-100" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_path "banners/fun.jpg" %>);">
   <div class="container d-flex justify-content-center flex-column h-100" data-target="navbar.banner">
     <div>
       <h1 class="my-3 col-12 col-sm-12">Find great people to carpool with.</h1>
@@ -6,7 +6,7 @@
       <form id="home-search" method="get" action="/trips" class="simple_form search col-12 col-lg-8">
         <label for="home-search-input">Where are you going?</label>
         <div class="search-form-control form-group">
-          <input id="home-search-input" type="text" name="to" class="form-control">
+          <input id="home-search-input" type="text" name="to" class="form-control" autocomplete='off' data-target='places.inputAddress'>
           <button type="submit" class="btn btn-flat">Search</button>
         </div>
     </form>

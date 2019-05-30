@@ -19,6 +19,8 @@ gem 'devise'
 gem 'cloudinary'
 gem 'carrierwave'
 gem 'pundit'
+gem 'geocoder'
+gem "algoliasearch-rails"
 
 group :development do
   gem 'web-console', '>= 3.3.0'
