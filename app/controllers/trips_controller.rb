@@ -7,23 +7,20 @@ class TripsController < ApplicationController
     @trips = policy_scope(Trip)
     @trips = @trips.where(end_point: destination) if destination
     @trips = @trips.where(start_point: origin) if origin
-
-    #create coordinates for start
+    # create coordinates for start
     @start_markers = @trips.map do |trip|
-    {
-      lat: trip.start_lat,
-      lng: trip.start_lng
-    }
-
-    #create coordinates for end
+      {
+        lat: trip.start_lat,
+        lng: trip.start_lng
+      }
+    end
+    # create coordinates for end
     # @end_markers = @trips.map do |trip|
     # {
     #   lat: trip.end_lat,
     #   lng: trip.end_lng
     # }
-
-    end
-
+    # end
   end
 
   def show
@@ -46,6 +43,8 @@ class TripsController < ApplicationController
       render :new
     end
   end
+
+
 
   private
 
