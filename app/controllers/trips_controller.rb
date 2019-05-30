@@ -32,8 +32,10 @@ class TripsController < ApplicationController
   private
 
   def filter_by_date(date = '')
-    date_time = DateTime.parse(date)
-    @trips = @trips.where('start_time >= ? AND start_time < ?', date_time, date_time + 3) if date.present?
+    if date.present?
+      date_time = DateTime.parse(date)
+      @trips = @trips.where('start_time >= ? AND start_time < ?', date_time, date_time + 3)
+    end
   end
 
   def filter_by_journey(destination: '', origin: '')
