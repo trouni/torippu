@@ -8,7 +8,7 @@
         <% if prev_review %>
           <p><%= prev_review.comment %></p>
         <% else %>
-          <h3>Add a review <%= user.username %></h3>
+          <h3><%= @review.trip.driver == user ? "Driver" : "Passenger" %>: Add a review <%= user.username %></h3>
           <%= simple_form_for [@trip, @review] do |f| %>
             <%= f.input :rating, collection: 0..5 %>
             <%= f.association :reviewee, as: :hidden, input_html: {value: user.id} %>
