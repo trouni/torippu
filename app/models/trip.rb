@@ -40,22 +40,20 @@ class Trip < ApplicationRecord
 
   private
 
-  # To enable Geocoder to works with multiple locations
- #  def geocode_endpoints
- #   if from_changed?
- #     geocoded = Geocoder.search(loc1).first
- #     if geocoded
- #       self.start_lat = geocoded.latitude
- #       self.start_lng = geocoded.longitude
- #     end
- #   end
- #   # Repeat for destination
- #       if to_changed?
- #     geocoded = Geocoder.search(loc2).first
- #     if geocoded
- #       self.end_lat = geocoded.latitude
- #       self.end_lat = geocoded.longitude
- #     end
- #   end
- # end
+  def geocode_endpoints
+    if end_point_changed?
+      geocoded = Geocoder.search(end_point).first
+      if geocoded
+        self.end_lat = geocoded.latitude
+        self.end_lng = geocoded.longitude
+      end
+    end
+    if start_point_changed?
+      geocoded = Geocoder.search(start_point).first
+      if geocoded
+        self.start_lat = geocoded.latitude
+        self.start_lng = geocoded.longitude
+      end
+    end
+  end
 end

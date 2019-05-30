@@ -5,22 +5,16 @@ class TripsController < ApplicationController
     destination = params[:to]
     origin = params[:from]
     @trips = policy_scope(Trip)
-    @trips = @trips.where(end_point: destination) if destination
-    @trips = @trips.where(start_point: origin) if origin
-    # create coordinates for start
-    @start_markers = @trips.map do |trip|
-      {
-        lat: trip.start_lat,
-        lng: trip.start_lng
-      }
-    end
-    # create coordinates for end
-    # @end_markers = @trips.map do |trip|
+    @trips = @trips.near(destination, 30, latitude: :end_lat, longitude: :end_lng) if destination
+    # @trips = @trips.near(origin, 30, latitude: :start_lat, longitude: :start_lng) if origin
+
+    #create coordinates for start
+    # @start_markers = @trips.map do |trip|
+
     # {
-    #   lat: trip.end_lat,
-    #   lng: trip.end_lng
+    #   lat: trip.start_lat,
+    #   lng: trip.start_lng
     # }
-    # end
   end
 
   def show
