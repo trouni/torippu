@@ -2,11 +2,21 @@ class Trip < ApplicationRecord
   belongs_to :driver, class_name: "User"
   has_many :bookings
 
+
+  def start_date
+    start_time.to_date
+  end
+
+  def end_date
+    end_time.to_date
+  end
+
   # after_validation :geocode, if: :will_save_change_to_start_point?
 
   geocoded_by :end_point, latitude: :end_lat, longitude: :end_lng
   geocoded_by :start_point, latitude: :start_lat, longitude: :start_lng
   after_validation :geocode, if: :will_save_change_to_end_point?
+
 
   def booking?(user)
     bookings.each do |booking|

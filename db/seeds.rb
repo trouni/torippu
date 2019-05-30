@@ -1,6 +1,11 @@
 require 'faker'
 
-CITIES = %w[Tokyo Osaka Kyoto Kobe Fukuoka]
+CITIES = [
+  'Tokyo, 東京都, Japan',
+  'Osaka, 大阪府, Japan',
+  'Fukuoka, 福岡県, Japan',
+  'Kyōto, 京都府, Japan'
+]
 
 USERS = [
   {
