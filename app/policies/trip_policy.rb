@@ -11,6 +11,14 @@ class TripPolicy < ApplicationPolicy
     end
   end
 
+  def new
+    create?
+  end
+
+  def create?
+    record.driver == user
+  end
+
   def show?
     true
   end
