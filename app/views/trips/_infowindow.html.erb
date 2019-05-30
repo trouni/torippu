@@ -1,0 +1,7 @@
+<div class="info-window">
+<%@trips.each do |trip| %>
+  <h5>To: <%= trip.end_point %></h5>
+  <h5>On: <%= trip.start_time.strftime("%Y-%m-%d %H:%M")%></h5>
+  <h5>For: <%= trip.price %> ¥</h5>
+  <% end %>
+</div>

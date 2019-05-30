@@ -22,7 +22,7 @@ class Trip < ApplicationRecord
 
   geocoded_by :end_point, latitude: :end_lat, longitude: :end_lng
   geocoded_by :start_point, latitude: :start_lat, longitude: :start_lng
-  after_validation :geocode, if: :will_save_change_to_end_point?
+  after_validation :geocode_endpoints
 
   def booking?(user)
     bookings.each do |booking|
