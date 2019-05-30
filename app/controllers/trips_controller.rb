@@ -2,19 +2,11 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show]
 
   def index
-    destination = params[:to]
-    origin = params[:from]
     @trips = policy_scope(Trip)
-    @trips = @trips.near(destination, 30, latitude: :end_lat, longitude: :end_lng) if destination
-    # @trips = @trips.near(origin, 30, latitude: :start_lat, longitude: :start_lng) if origin
 
-    #create coordinates for start
-    # @start_markers = @trips.map do |trip|
+    filter_by_date(params[:date])
+    filter_by_journey(origin: params[:from], destination: params[:to])
 
-    # {
-    #   lat: trip.start_lat,
-    #   lng: trip.start_lng
-    # }
   end
 
   def show
@@ -41,6 +33,20 @@ class TripsController < ApplicationController
 
 
   private
+
+  def filter_by_date(date = '')
+    date_time = DateTime.parse(date)
+    @trips = @trips.where('start_time >= ? AND start_time < ?', date_time, date_time + 3) if date.present?
+  end
+
+  def filter_by_journey(destination: '', origin: '')
+    if origin.present? && destination.present?
+      # @trips = @trips.near(destination, 30, latitude: :end_lat, longitude: :end_lng).near(origin, 30, latitude: :start_lat, longitude: :start_lng)
+      @trips = @trips.near(destination, 30, latitude: :end_lat, longitude: :end_lng) & @trips.near(origin, 30, latitude: :start_lat, longitude: :start_lng)
+    elsif origin.present? || destination.present?
+      @trips = @trips.near(destination, 30, latitude: :end_lat, longitude: :end_lng) + @trips.near(origin, 30, latitude: :start_lat, longitude: :start_lng)
+    end
+  end
 
   def trip_params
     params.require(:trip).permit(:description, :seats_available, :start_point, :end_point, :start_time, :end_time, :price)
