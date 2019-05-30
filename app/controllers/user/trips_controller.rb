@@ -5,4 +5,10 @@ class User::TripsController < ApplicationController
     @upcoming_trips = @trips.where("start_time >= '#{DateTime.now}'")
     @past_trips = @trips.where("start_time < '#{DateTime.now}'")
   end
+
+  def rating
+    @passenger_rating = 0
+    @driver_rating = 0
+
+  end
 end

@@ -15,4 +15,17 @@ class User < ApplicationRecord
     # trips_as_passenger + trips_as_driver
     Trip.joins(:bookings).where("bookings.passenger_id = #{id}").or(Trip.joins(:bookings).where(driver_id: id))
   end
+
+  def rating
+    reviews = Review.where("reviews.reviewee_id = #{id}")
+    sum = 0
+    if reviews.length.zero?
+      return nil
+    else
+      reviews.each do |review|
+        sum += review.rating
+      end
+    end
+    return sum / reviews.length
+  end
 end
