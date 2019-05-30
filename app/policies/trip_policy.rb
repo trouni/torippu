@@ -16,7 +16,7 @@ class TripPolicy < ApplicationPolicy
   end
 
   def create?
-    record.driver == user
+    true
   end
 
   def show?
