@@ -1,5 +1,5 @@
 <div class="cards-container my-5">
-  <% trips_by_date = trips.group_by { |trip| trip.start_date } %>
+  <% trips_by_date = trips.group_by { |trip| trip.start_time.strftime("%Y-%m-%d") } %>
   <% trips_by_date.keys.sort.each do |date| %>
     <p class="text-center">Departing <strong><%= date.strftime("%e %b %Y") %></strong></p>
     <% trips_by_date[date].each do |trip| %>
