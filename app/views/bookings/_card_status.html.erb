@@ -1,12 +1,12 @@
 <div class="booking-cart border">
   <div class="row">
     <div class="mx-5 py-3 border-bottom w-100">
-    <h5>Booking pending:</h5>
+    <h5>Booking status</h5>
       <div class="booking-confirmed-<%=booking.approved%>">
-       <% if booking.approved%>
-         <p class="p-l-3"> You are <span class="confirmed">confirmed </span>for this trip</p>
+       <% if booking.approved?%>
+         <p class="p-l-3"> You are <span class="confirmed">confirmed</span> for this trip!</p>
        <% else %>
-         <p class="p-l-3"><%= @trip.driver.username %> has <span class="applied">not yet confirmed </span>your booking</p>
+         <p class="p-l-3"><%= @trip.driver.username %> has <span class="applied">not yet confirmed</span> your booking</p>
        <% end %>
      </div>
     </div>
@@ -14,13 +14,7 @@
   <div class="row">
     <div class="mx-5 py-3 w-100">
       <div class="card-grid-2 booking-confirmed-<%=booking.approved%>">
-        <div class="card-grid-left">
-          <p>No. of seats:</p>
-        </div>
-        <div class="card-grid-right">
-          <h5 class="m-0"><%= booking.seats_number %></h5>
-
-        </div>
+        <p>Number of seats: <%= booking.seats_number %></p>
       </div>
 
     </div>

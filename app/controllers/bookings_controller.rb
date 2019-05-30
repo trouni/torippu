@@ -1,5 +1,6 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:destroy]
+  before_action :set_booking, only: [:update, :destroy]
+
   def create
     @trip = Trip.find(params[:trip_id])
     @booking = Booking.new(booking_params)
@@ -11,6 +12,12 @@ class BookingsController < ApplicationController
     else
       render "trips/show"
     end
+  end
+
+  def update
+    @trip = Trip.find(params[:trip_id])
+    @booking.update(booking_params)
+    redirect_to trip_path(@trip)
   end
 
   def destroy
