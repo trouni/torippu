@@ -1,8 +1,14 @@
 <div class="card-user d-flex align-items-center border-top bg-white my-3 my-md-3 py-3 justify-content-between">
   <div class="user-details d-flex align-items-center">
     <%= cl_image_tag user.photo, gravity: "faces", crop: "fill", class: "avatar-large mr-3" %>
-    <p class="p-0 m-0"><%= user.username %></p>
-    <p><%= render "shared/stars", user: user%></p>
+    <div class="mr-5 ml-3">
+      <div class="row p-0 mt-0 mb-0">
+        <p class=""><%= user.username %></p>
+      </div>
+      <div class="row p-0 mt-0 mb-0">
+        <%= render "shared/stars", user: user%>
+      </div>
+    </div>
   </div>
   <div class="user-rating">
     <!-- <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i> (3.6) -->
