@@ -1,0 +1,13 @@
+<% if  user.rating.nil? %>
+  <p class="reviews-stars">No reviews yet...</p>
+<% else %>
+  <p class="reviews-stars">
+  <%user.rating.times do%>
+    <i class="fas fa-star"></i>
+  <% end %>
+  <%(5 - user.rating).times do%>
+    <i class="far fa-star"></i>
+  <% end %>
+  (<%= user.rating%>)
+  </p>
+<% end%>

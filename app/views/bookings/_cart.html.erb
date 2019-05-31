@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="mx-5 py-3 w-100">
-      <h3> <%=  trip.seats_remain%> <span> seats remaining</span></h3>
+      <h3> <%= pluralize trip.seats_remain, "seat"%> <span> remaining</span></h3>
       <%= simple_form_for [booking.trip, booking] do |f| %>
           <%= f.input :seats_number, label: "Number of seats", input_html: { min: 1, max: trip.seats_remain } %>
           <%= f.submit "Make a booking request", class: "btn btn-primary w-100" %>

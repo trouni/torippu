@@ -1,23 +1,33 @@
-<%= render partial: "search_banner", locals: { banner_url: "banners/search.jpg" } %>
+<div id="trips-index" class="100vh-container">
+  <% compact = params[:to].present? && params[:from].present? %>
+  <%= render partial: "search_banner", locals: { banner_url: "banners/search.jpg", compact: compact } %>
 
-<div class="container">
-  <%=  render partial: "map"%>
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-8">
+  <div class="map-and-cards-container">
+    <div class="row justify-content-center">
 
-      <div class="text-center m-3">
-        <p class="m-0">Driving to <%= params[:to] %>?</p>
-        <%= link_to new_trip_path, class: "btn btn-outline-primary rounded mb-3" do %>
-        <i class="fas fa-plus-circle"></i> Add your trip to TORIPPU
+      <div id='trips-list' class="col-12 col-md-6 col-lg-5">
+
+        <!-- <div class="text-center m-3">
+          <p class="m-0">Driving to <%#= params[:to] %>?</p>
+          <%#= link_to new_trip_path, class: "btn btn-outline-primary rounded mb-3" do %>
+          <i class="fas fa-plus-circle"></i> Add your trip to TORIPPU
+          <%# end %>
+        </div> -->
+
+        <% if @trips.empty? %>
+          <p class="font-italic text-center">No trips available for your selection. <%= link_to "List your trip", new_trip_path %> or see the suggestions below.</p>
+          <%= render partial: "trips/cards", locals: { trips: Trip.all.order(:start_time) } %>
+        <% else %>
+          <%= render partial: "trips/cards", locals: { trips: @trips } %>
         <% end %>
       </div>
 
-      <% if @trips.empty? %>
-        <p class="font-italic text-center">No trips available for your selection. <%= link_to "List your trip", new_trip_path %> or see the suggestions below.</p>
-        <%= render partial: "trips/cards", locals: { trips: Trip.all.order(:start_time) } %>
-      <% else %>
-        <%= render partial: "trips/cards", locals: { trips: @trips } %>
-      <% end %>
+      <div
+        id="map-search" class="col-12 col-md-6 col-lg-7"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+        ></div>
+
     </div>
   </div>
 </div>

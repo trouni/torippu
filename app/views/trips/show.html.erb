@@ -12,22 +12,29 @@
     <% end %>
   <% else %>
 
-  <div class="row">
+    <div class="row w-100">
 
-    <div class="col-12 col-md-6 col-lg-8">
-      <%= render partial: "trips/details", locals: { trip: @trip } %>
+      <div class="col-12 col-md-6 col-lg-8">
+        <%= render partial: "trips/details", locals: { trip: @trip } %>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+
+
+          <% if @trip.approved_passenger?(current_user) && @trip.end_time > Time.now%>
+            <%= render partial: "bookings/card_status", locals: { booking: @bookings.where(passenger: current_user).first } %>
+          <% else %>
+          <% end %>
+
+            <% if @trip.end_time > Time.now %>
+              <%= render partial: "bookings/cart", locals: { trip: @trip, booking: @booking } %>
+            <% else %>
+              <%= link_to new_trip_review_path(@trip), class: "btn btn-primary w-100 rounded mb-3 ml-4" do %>
+                <i class="fas fa-plus-circle"></i> Add a review
+              <% end %>
+            <% end %>
+      </div>
     </div>
-
-    <div class="col-12 col-md-6 col-lg-4">
-
-      <% if Booking.where(passenger: current_user, trip: @trip).length > 0 %>
-        <%= render partial: "bookings/card_status", locals: { booking: @bookings.where(passenger: current_user).first } %>
-      <% else %>
-        <%= render partial: "bookings/cart", locals: { trip: @trip, booking: @booking } %>
-      <% end %>
-    </div>
-
-  </div>
   <% end %>
 </div>
 

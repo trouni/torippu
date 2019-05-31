@@ -16,19 +16,19 @@ USERS = [
   },
   {
     username: "saad",
-    email: "saad@le.com",
+    email: "saad@me.com",
     photo: "https://avatars0.githubusercontent.com/u/21337523?v=4",
     password: "secret",
   },
   {
     username: "eugene",
-    email: "eugene@le.com",
+    email: "eugene@me.com",
     photo: "https://avatars1.githubusercontent.com/u/49116295?v=4",
     password: "secret",
   },
   {
     username: "alex",
-    email: "alex@le.com",
+    email: "alex@me.com",
     photo: "https://avatars0.githubusercontent.com/u/48198772?v=4",
     password: "secret",
   },
@@ -59,12 +59,14 @@ def create_trips(user)
   end
 end
 
+i = 0
 15.times do
   name = Faker::Name.name.gsub(" ", "")
   username = User.new(
     username: name,
-    email: name + "@gmail.com",
+    email: user + i + "@me.com",
     password: "secret"
+    i += 1
   )
   username.remote_photo_url = "http://lorempixel.com/200/200/people/"
   username.save!
@@ -77,6 +79,21 @@ USERS.each do |user_hash|
   user.remote_photo_url = user_hash[:photo]
   user.save!
   create_trips(user)
+
+  rand(1..2).times do
+  start_time = DateTime.now - rand(1..60) + rand(1..60) + rand # start date between now and 1 month from now
+  end_time = start_time + rand(1..10) / 24.0 # trip duration between 1 and 10 hours
+  Trip.create!(
+    start_time: start_time,
+    end_time: end_time,
+    start_point: CITIES.sample,
+    end_point: CITIES.sample,
+    description: Faker::TvShows::HowIMetYourMother.quote,
+    seats_available: rand(1..3),
+    driver: user,
+    price: rand(1..10) * 500
+  )
+  end
 
   #   4.times do
   #   Review.create!(

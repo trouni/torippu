@@ -24,6 +24,7 @@
         </div>
 
         <div class="more-info col-12 shadow">
+          <div id="trip-duration-info"></div>
           <div class="form-group row">
             <div class="input-group mb-3 col-6">
               <%= f.input :start_time, label: "Departure", wrapper_html: { class: "m-0 flex-grow-1 text-center datepicker" }, input_html: { class: "datepicker" } %>
@@ -49,7 +50,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Price</span>
               </div>
-              <%= f.input :price, label: false, wrapper_html: { class: "m-0 flex-grow-1" } %>
+              <%= f.input :price, label: false, input_html: { min: '0', step: '100' } ,wrapper_html: { class: "m-0 flex-grow-1"} %>
             </div>
           </div>
           <%= f.submit "Let's ride!", class: 'btn btn-primary w-100'  %>
@@ -60,6 +61,6 @@
   </div>
 </div>
 
-<div id="map" data-controller="mapbox" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>" data-marker-from='[139.77,35.68]' data-marker-to='[135.4920315,34.69]'>
+<div id="map-create-trip" data-controller="mapbox" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>" data-marker-from='[139.77,35.68]' data-marker-to='[135.4920315,34.69]'>
 
 </div>
