@@ -21,9 +21,11 @@
       <div class="col-12 col-md-6 col-lg-4">
 
 
-          <% if Booking.where(passenger: current_user, trip: @trip).length > 0 %>
+          <% if @trip.approved_passenger?(current_user) && @trip.end_time > Time.now%>
             <%= render partial: "bookings/card_status", locals: { booking: @bookings.where(passenger: current_user).first } %>
           <% else %>
+          <% end %>
+
             <% if @trip.end_time > Time.now %>
               <%= render partial: "bookings/cart", locals: { trip: @trip, booking: @booking } %>
             <% else %>
@@ -31,8 +33,6 @@
                 <i class="fas fa-plus-circle"></i> Add a review
               <% end %>
             <% end %>
-          <% end %>
-
       </div>
     </div>
   <% end %>
