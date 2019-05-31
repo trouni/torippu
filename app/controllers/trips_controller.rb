@@ -2,16 +2,28 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show]
 
   def index
-    @trips = policy_scope(Trip)
+    @trips = policy_scope(Trip).where('start_time >= ?', DateTime.now)
     filter_by_date(params[:date])
     filter_by_journey(origin: params[:from], destination: params[:to])
-    @markers = @trips.map do |trip|
-      {
-        lat: trip.start_lat,
-        lng: trip.start_lng,
-        infoWindow: render_to_string(partial: "infowindow", locals: { trip: trip }),
-        image_url: helpers.asset_url('/app/assets/images/logo.jpeg')
-      }
+
+    if params[:from].present?
+      @markers = @trips.map do |trip|
+        {
+          lat: trip.start_lat,
+          lng: trip.start_lng,
+          infoWindow: render_to_string(partial: "trips/infowindow", locals: { trip: trip }),
+          image_url: helpers.asset_url('/app/assets/images/logo.jpeg')
+        }
+      end
+    elsif params[:to].present?
+      @markers = @trips.map do |trip|
+        {
+          lat: trip.end_lat,
+          lng: trip.end_lng,
+          infoWindow: render_to_string(partial: "trips/infowindow", locals: { trip: trip }),
+          image_url: helpers.asset_url('/app/assets/images/logo.jpeg')
+        }
+      end
     end
   end
 

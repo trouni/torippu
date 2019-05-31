@@ -1,0 +1,45 @@
+#trips-index {
+  height: 100vh;
+  .banner.compact {
+    min-height: unset;
+    min-height: 10vh !important;
+  }
+  .banner.compact #search-submit {
+  display: none;
+  }
+  #trips-list {
+    padding: 0;
+    margin: 0;
+    height: 90vh;
+    overflow: scroll;
+  }
+  .100vh-container {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .departure-date, .card-trip {
+    margin: 0;
+  }
+
+  .departure-date {
+    color: white;
+    background-color: $primary;
+    padding: 5px 0;
+  }
+  .compact #trips-search {
+    // text-align: left;
+  }
+}
+
+#map-search {
+  display: none;
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+  #map-search {
+    height: 90vh;
+    display: unset;
+  }
+}

@@ -37,6 +37,10 @@ class Trip < ApplicationRecord
     return false
   end
 
+  def driver?(user)
+    driver == user
+  end
+
   def approved_passenger?(user)
     bookings.each do |booking|
       return true if booking?(user) && booking.approved
