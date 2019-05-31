@@ -46,7 +46,8 @@ class Trip < ApplicationRecord
     else
       users.where.not(id: user).to_a << driver
     end
-    
+  end
+
   private
 
   def geocode_endpoints
