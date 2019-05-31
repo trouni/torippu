@@ -1,53 +1,136 @@
 import mapboxgl from 'mapbox-gl';
 
-const mapElement = document.getElementById('map');
-const bounds = [
-[128.522924, 31.350410], // Southwest coordinates
-[146.349173, 43.461032]  // Northeast coordinates
-];
-
-const buildMap = () => {
-  mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
-  return new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v10',
-    maxBounds: bounds
-  });
-};
-
-const addMarkersToMap = (map, markers) => {
-  markers.forEach((marker) => {
-    const popup = new mapboxgl.Popup().setHTML(marker.infoWindow);
-
-    // Create a HTML element for your custom marker
-    const element = document.createElement('div');
-    element.className = 'marker';
-    element.style.backgroundImage = `url('${marker.image_url}')`;
-    element.style.backgroundSize = 'contain';
-    element.style.width = '25px';
-    element.style.height = '25px';
-
-    // Pass the element as an argument to the new marker
-    new mapboxgl.Marker()
-      .setLngLat([ marker.lng, marker.lat ])
-      .setPopup(popup)
-      .addTo(map);
-  });
-};
+const geoapi_url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
+const url_append = '.json?access_token=pk.eyJ1Ijoib25pZ2lyaXB3IiwiYSI6ImNqdmoxN2ZnNTBidzI0MGszMWRqbzg4eWcifQ.Kq3ipy7NCPpLWqM49pyY_g'
 
 const fitMapToMarkers = (map, markers) => {
   const bounds = new mapboxgl.LngLatBounds();
-  markers.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
-  map.fitBounds(bounds, { padding: 70, maxZoom: 13 });
+  markers.forEach(marker => bounds.extend([ marker[0], marker[1] ]));
+  map.fitBounds(bounds, { padding: 200, maxZoom: 15 });
 };
 
 const initMapbox = () => {
-  if (mapElement) {
-    const map = buildMap();
-    const markers = JSON.parse(mapElement.dataset.markers);
-    addMarkersToMap(map, markers);
-    fitMapToMarkers(map, markers);
-  }
-};
+  const mapElement = document.getElementById('map');
+  const markers = [[139.77,35.68]];
 
-export { initMapbox };
+  if (mapElement) {
+    const fromCoordinates = JSON.parse(mapElement.dataset.markerFrom)
+    const toCoordinates = JSON.parse(mapElement.dataset.markerTo)
+
+    const originInput = document.getElementById('trip_start_point')
+    const destinationInput = document.getElementById('trip_end_point')
+
+    mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
+
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        center: [139.77,35.68],
+        zoom: 5
+    });
+
+    // initialFitMapToMarkers(map, )
+
+    var mapDirections = new MapboxDirections({
+        accessToken: mapboxgl.accessToken,
+        system: 'metric',
+        controls: {
+            inputs: false
+        },
+        styles: [{
+            'id': 'directions-route-line',
+            'type': 'line',
+            'source': 'directions',
+            'layout': {
+                'line-cap': 'round',
+                'line-join': 'round'
+            },
+            'paint': {
+                'line-color': '#488286',
+                'line-width': 3
+            },
+            'filter': [
+                'all',
+                ['in', '$type', 'LineString'],
+                ['in', 'route', 'selected']
+            ]
+        },{
+            'id': 'directions-origin-point',
+            'type': 'circle',
+            'source': 'directions',
+            'paint': {
+                "circle-radius": 7,
+                "circle-color": "#488286"
+            },
+            'filter': [
+                'all',
+                ['in', '$type', 'Point'],
+                ['in', 'marker-symbol', 'A']
+            ]
+        },{
+            'id': 'directions-destination-point',
+            'type': 'circle',
+            'source': 'directions',
+            'paint': {
+                "circle-radius": 7,
+                "circle-color": "#488286"
+            },
+            'filter': [
+                'all',
+                ['in', '$type', 'Point'],
+                ['in', 'marker-symbol', 'B']
+            ]
+        }]
+    })
+
+    originInput.addEventListener("change", (event) => {
+    const api_url = geoapi_url + event.currentTarget.value + url_append
+    fetch(api_url).then(response => response.json())
+      .then((data) => {
+        const coordinates = [
+          data.features[0].geometry.coordinates[0],
+          data.features[0].geometry.coordinates[1]
+        ];
+        mapDirections.setOrigin(coordinates);
+        markers[0] = coordinates;
+        new mapboxgl.Marker(map)
+          .setLngLat(coordinates)
+          .addTo(map);
+        fitMapToMarkers(map, markers);
+
+        if (markers.length === 2) {
+          console.log(markers);
+          map.addControl(mapDirections, 'top-left');
+        }
+      })
+    })
+
+    destinationInput.addEventListener("change", (event) => {
+    const api_url = geoapi_url + event.currentTarget.value + url_append
+    fetch(api_url).then(response => response.json())
+      .then((data) => {
+        const coordinates = [
+          data.features[0].geometry.coordinates[0],
+          data.features[0].geometry.coordinates[1]
+        ];
+        if (markers.length < 2) {
+          markers.push(coordinates)
+        } else {
+          markers[1] = coordinates;
+        }
+        mapDirections.setDestination(coordinates);
+        if (markers.length === 2) {
+          console.log(markers);
+          map.addControl(mapDirections, 'top-left');
+        } else {
+          fitMapToMarkers(map, markers);
+        }
+        new mapboxgl.Marker(map)
+          .setLngLat(coordinates)
+          .addTo(map);
+      })
+    })
+  }
+}
+
+export { initMapbox }

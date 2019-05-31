@@ -1,0 +1,69 @@
+#form-new-trip {
+  position: absolute;
+  top: -70px;
+  h4 {
+    font-weight: 200;
+  }
+
+  .form-groups-container {
+    height: 100vh;
+  }
+
+  .datepicker {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    background-color: white;
+    select {
+      border: none;
+      font-size: 16px;
+      letter-spacing: -1px;
+      appearance: none;
+    }
+  }
+
+  .journey, .more-info {
+    z-index: 10;
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .journey {
+    background: linear-gradient(#ffffffff, #ffffff77);
+  }
+
+  .more-info {
+    background: linear-gradient(#ffffff77, #ffffffff);
+  }
+
+  .journey svg {
+    fill: $primary;
+    opacity: 0.8;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .input-group-text {
+    background-color: $primary;
+    color: white;
+  }
+
+  input[type="submit"] {
+    font-size: 1.5em;
+  }
+
+  .invalid-feedback {
+    display: none;
+  }
+}
+
+#map {
+  width: 100%;
+  height: 90vh;
+  z-index: -1;
+
+  .mapbox-directions-instructions, .mapbox-directions-profile {
+    display: none;
+  }
+}

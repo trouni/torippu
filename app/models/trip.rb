@@ -1,6 +1,10 @@
 class Trip < ApplicationRecord
   belongs_to :driver, class_name: "User"
   has_many :bookings
+  validates :start_point, presence: :true
+  validates :end_point, presence: :true
+  validates :start_time, presence: :true
+  validates :seats_available, presence: :true, numericality: { only_integer: true, greater_than: 0 }
   has_many :users, through: :bookings, source: :passenger, foreign_key: :passenger_id
   has_many :reviews
 
@@ -15,7 +19,7 @@ class Trip < ApplicationRecord
   def seats_remain
     booked_seats = 0
     bookings.each do |booking|
-      booked_seats += booking.seats_number.to_i if booking.approved
+      booked_seats += booking.seats_number.to_i if booking.approved?
     end
     return seats_available - booked_seats
   end

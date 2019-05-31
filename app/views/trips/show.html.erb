@@ -1,6 +1,6 @@
 <%= render partial: "shared/banner_category", locals: { title: "Trip summary", banner_url: 'https://source.unsplash.com/collection/4894155/1600x900' } %>
 
-<div class="container pb-5">
+<div class="tripshow-content container pb-5">
   <%= render partial: "trips/card_journey_summary", locals: { trip: @trip } %>
 
   <% if current_user ==  @trip.driver %>
@@ -12,7 +12,7 @@
     <% end %>
   <% else %>
 
-  <div class="row mt-5">
+  <div class="row">
 
     <div class="col-12 col-md-6 col-lg-8">
       <%= render partial: "trips/details", locals: { trip: @trip } %>

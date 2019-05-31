@@ -1,0 +1,30 @@
+.tripshow-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.journey-summary {
+  text-align: center;
+  top: -50px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 2em 1em;
+  h3 {
+    margin: 0;
+    font-size: 20px;
+  }
+  p {
+    margin: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .tripshow-content {
+    padding-top: 200px;
+  }
+  .journey-summary {
+    position: absolute;
+  }
+}
