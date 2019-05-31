@@ -33,21 +33,16 @@ USERS = [
     password: "secret",
   },
 ]
+puts 'deleting reviews'
+Review.destroy_all
 puts 'Deleting bookings...'
 Booking.destroy_all
 puts 'Deleting trips...'
 Trip.destroy_all
 puts 'Deleting users...'
 User.destroy_all
-# puts 'deleting reviews'
-# Review.destroy_all
 
-puts 'Creating users and trips...'
-USERS.each do |user_hash|
-  user = User.create!(user_hash)
-  user.remote_photo_url = user_hash[:photo]
-  user.save!
-
+def create_trips(user)
   rand(2..10).times do
     start_time = DateTime.now + rand(1..30) + rand # start date between now and 1 month from now
     end_time = start_time + rand(1..18) / 24.0 # trip duration between 1 and 18 hours
@@ -62,6 +57,26 @@ USERS.each do |user_hash|
       price: rand(1..10) * 500
     )
   end
+end
+
+15.times do
+  name = Faker::Name.name.gsub(" ", "")
+  username = User.new(
+    username: name,
+    email: name + "@gmail.com",
+    password: "secret"
+  )
+  username.remote_photo_url = "http://lorempixel.com/200/200/people/"
+  username.save!
+  create_trips(username)
+end
+
+puts 'Creating users and trips...'
+USERS.each do |user_hash|
+  user = User.create!(user_hash)
+  user.remote_photo_url = user_hash[:photo]
+  user.save!
+  create_trips(user)
 
   #   4.times do
   #   Review.create!(
