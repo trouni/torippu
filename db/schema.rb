@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 2019_05_30_031219) do
     t.bigint "trip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "seats_number", default: 1
     t.boolean "approved", default: false
+    t.integer "seats_number", default: 1
     t.index ["passenger_id"], name: "index_bookings_on_passenger_id"
     t.index ["trip_id"], name: "index_bookings_on_trip_id"
   end
