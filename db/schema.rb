@@ -44,14 +44,16 @@ ActiveRecord::Schema.define(version: 2019_05_30_031219) do
     t.integer "seats_available"
     t.string "start_point"
     t.string "end_point"
-    t.date "start_date"
-    t.date "end_date"
     t.bigint "driver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer "price", default: 0
+    t.float "start_lat"
+    t.float "start_lng"
+    t.float "end_lat"
+    t.float "end_lng"
     t.index ["driver_id"], name: "index_trips_on_driver_id"
   end
 

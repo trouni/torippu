@@ -1,6 +1,20 @@
+.cards-container {
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
 .card-trip {
-  height: 200px;
+  margin: 2em 0;
+  // height: 150px;
   border-radius: 5px;
+  background-color: white;
+  border: 1px solid $light-gray;
+  &:hover {
+    background-color: $light-gray;
+  }
+
   h3 {
     font-size: 24px;
   }
@@ -16,11 +30,40 @@
   .card-tags i {
     margin-right: 5px;
   }
-}
 
-.cards-container {
-  a {
-    text-decoration: none;
-    color: inherit;
+  &.booking-pending {
+    position: relative;
+    border: 1px solid $yellow !important;
+    border-top-right-radius: 0;
+    &::after {
+      content: "Request pending";
+      font-size: 0.8em;
+      color: white;
+      padding: 0 10px;
+      position: absolute;
+      top: -1.5em;
+      right: -1px;
+      height: 1.5em;
+      background-color: $yellow;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+    }
+  }
+
+  &.booking-approved {
+    border: 1px solid $seagreen !important;
+    &::after {
+      content: "Booking confirmed";
+      font-size: 0.8em;
+      color: white;
+      padding: 0 10px;
+      position: absolute;
+      top: -1.5em;
+      right: -1px;
+      height: 1.5em;
+      background-color: $seagreen;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+    }
   }
 }

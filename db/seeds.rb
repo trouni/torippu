@@ -1,6 +1,11 @@
 require 'faker'
 
-CITIES = %w[Tokyo Osaka Kyoto Kobe Fukuoka]
+CITIES = [
+  'Tokyo, 東京都, Japan',
+  'Osaka, 大阪府, Japan',
+  'Fukuoka, 福岡県, Japan',
+  'Kyōto, 京都府, Japan'
+]
 
 USERS = [
   {
@@ -28,15 +33,16 @@ USERS = [
     password: "secret",
   },
 ]
-puts 'deleting bookings'
+puts 'Deleting bookings...'
 Booking.destroy_all
-puts 'deleting trips'
+puts 'Deleting trips...'
 Trip.destroy_all
-puts 'deleting users'
+puts 'Deleting users...'
 User.destroy_all
 # puts 'deleting reviews'
 # Review.destroy_all
 
+puts 'Creating users and trips...'
 USERS.each do |user_hash|
   user = User.create!(user_hash)
   user.remote_photo_url = user_hash[:photo]
@@ -48,8 +54,6 @@ USERS.each do |user_hash|
     Trip.create!(
       start_time: start_time,
       end_time: end_time,
-      start_date: start_time.to_date,
-      end_date: end_time.to_date,
       start_point: CITIES.sample,
       end_point: CITIES.sample,
       description: Faker::TvShows::HowIMetYourMother.quote,
@@ -68,6 +72,7 @@ USERS.each do |user_hash|
   # end
 end
 
+puts 'Creating bookings...'
 Trip.all.each do |trip|
   rand(1..trip.seats_available).times do |variable|
     Booking.create!(

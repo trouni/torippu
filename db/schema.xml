@@ -41,7 +41,7 @@
 <type label="Inet CIDR Addr" length="0" sql="CIDR" quote="'"/>
 <type label="Geometry" length="0" sql="GEOMETRY" quote="'"/>
 </group>
-</datatypes><table x="280" y="362" name="users">
+</datatypes><table x="171" y="347" name="users">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -67,10 +67,23 @@
 <part>id</part>
 </key>
 </table>
-<table x="601" y="36" name="reviews">
+<table x="543" y="653" name="reviews">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
+<row name="trip_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="trips" row="id" />
+</row>
+<row name="reviewer_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="id" />
+<relation table="users" row="id" />
+</row>
+<row name="reviewee_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="id" />
+</row>
 <row name="comment" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -93,7 +106,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="909" y="321" name="trips">
+<table x="868" y="332" name="trips">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -135,7 +148,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="627" y="530" name="bookings">
+<table x="537" y="69" name="bookings">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
