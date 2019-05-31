@@ -6,28 +6,31 @@ const url_append = '.json?access_token=pk.eyJ1Ijoib25pZ2lyaXB3IiwiYSI6ImNqdmoxN2
 const fitMapToMarkers = (map, markers) => {
   const bounds = new mapboxgl.LngLatBounds();
   markers.forEach(marker => bounds.extend([ marker[0], marker[1] ]));
-  map.fitBounds(bounds, { padding: 200, maxZoom: 15 });
+  map.fitBounds(bounds, { padding: 300, maxZoom: 10 });
 };
 
 const initMapbox = () => {
-  const mapElement = document.getElementById('map');
+  const mapCreateTrip = document.getElementById('map-create-trip');
+  const mapSearch = document.getElementById('map-search');
   const markers = [[139.77,35.68]];
 
-  if (mapElement) {
-    const fromCoordinates = JSON.parse(mapElement.dataset.markerFrom)
-    const toCoordinates = JSON.parse(mapElement.dataset.markerTo)
+  if (mapCreateTrip) {
+    const fromCoordinates = JSON.parse(mapCreateTrip.dataset.markerFrom)
+    const toCoordinates = JSON.parse(mapCreateTrip.dataset.markerTo)
 
     const originInput = document.getElementById('trip_start_point')
     const destinationInput = document.getElementById('trip_end_point')
 
-    mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
+    mapboxgl.accessToken = mapCreateTrip.dataset.mapboxApiKey;
 
     var map = new mapboxgl.Map({
-        container: 'map',
+        container: 'map-create-trip',
         style: 'mapbox://styles/mapbox/streets-v9',
         center: [139.77,35.68],
         zoom: 5
     });
+    map.addControl(new mapboxgl.NavigationControl());
+    map.scrollZoom.disable();
 
     // initialFitMapToMarkers(map, )
 
@@ -99,9 +102,9 @@ const initMapbox = () => {
         fitMapToMarkers(map, markers);
 
         if (markers.length === 2) {
-          console.log(markers);
           map.addControl(mapDirections, 'top-left');
         }
+        // document.getElementById('trip-duration-info').innerHTML = document.querySelector('.mapbox-directions-component.mapbox-directions-route-summary').innerHTML
       })
     })
 
@@ -120,7 +123,6 @@ const initMapbox = () => {
         }
         mapDirections.setDestination(coordinates);
         if (markers.length === 2) {
-          console.log(markers);
           map.addControl(mapDirections, 'top-left');
         } else {
           fitMapToMarkers(map, markers);
@@ -128,8 +130,33 @@ const initMapbox = () => {
         new mapboxgl.Marker(map)
           .setLngLat(coordinates)
           .addTo(map);
+        // document.getElementById('trip-duration-info').innerHTML = document.querySelector('.mapbox-directions-component.mapbox-directions-route-summary').innerHTML
       })
     })
+  }
+
+  if (mapSearch) {
+    const originInput = document.getElementById('from')
+    const destinationInput = document.getElementById('to')
+
+    mapboxgl.accessToken = mapSearch.dataset.mapboxApiKey;
+    const map = new mapboxgl.Map({
+      container: 'map-search',
+      style: 'mapbox://styles/mapbox/streets-v10'
+    });
+
+    const markers = JSON.parse(mapSearch.dataset.markers);
+    const markersArray = []
+    markers.forEach((marker) => {
+      const popup = new mapboxgl.Popup().setHTML(marker.infoWindow);
+      new mapboxgl.Marker()
+        .setLngLat([ marker.lng, marker.lat ])
+        .setPopup(popup)
+        .addTo(map);
+      markersArray.push([ marker.lng, marker.lat ])
+    });
+
+    fitMapToMarkers(map, markersArray);
   }
 }
 

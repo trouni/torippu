@@ -1,7 +1,17 @@
-<div class="info-window">
-<%@trips.each do |trip| %>
-  <h5>To: <%= trip.end_point %></h5>
-  <h5>On: <%= trip.start_time.strftime("%Y-%m-%d %H:%M")%></h5>
-  <h5>For: <%= trip.price %> ¥</h5>
-  <% end %>
+<%= link_to trip_path(trip) do %>
+<div class="map-infowindow m-0 h-100">
+  <div class="row d-flex justify-content-between m-3">
+    <h4 class="card-price m-0">
+      ¥<%= trip.price %>
+    </h4>
+    <% if current_user == trip.driver %>
+    <i class="fas fa-car fa-2x driver-icon"></i>
+    <% else %>
+    <%= cl_image_tag trip.driver.photo, gravity: "faces", crop: "fill", class: "avatar" %>
+    <% end %>
+  </div>
+  <div class="row card-journey-destination m-3">
+    <!-- <i class="fas fa-arrow-circle-right text-center"></i> --><h3><%= trip.end_point %></h3>
+  </div>
 </div>
+<% end %>
