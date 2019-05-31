@@ -62,6 +62,20 @@ USERS.each do |user_hash|
       price: rand(1..10) * 500
     )
   end
+  rand(1..2).times do
+  start_time = DateTime.now - rand(1..30) + rand # start date between now and 1 month from now
+  end_time = start_time + rand(1..18) / 24.0 # trip duration between 1 and 18 hours
+  Trip.create!(
+    start_time: start_time,
+    end_time: end_time,
+    start_point: CITIES.sample,
+    end_point: CITIES.sample,
+    description: Faker::TvShows::HowIMetYourMother.quote,
+    seats_available: rand(1..3),
+    driver: user,
+    price: rand(1..10) * 500
+  )
+  end
 
   #   4.times do
   #   Review.create!(
