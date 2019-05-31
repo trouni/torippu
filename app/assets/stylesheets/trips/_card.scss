@@ -11,16 +11,21 @@
   border-radius: 5px;
   background-color: white;
   border: 1px solid $light-gray;
+  position: relative;
   &:hover {
     background-color: $light-gray;
   }
 
   h3 {
-    font-size: 24px;
+    font-size: 16px;
   }
 
   .card-journey i {
     font-size: 1.5em;
+  }
+
+  .card-price {
+    font-size: 20px;
   }
 
   .card-tags {
@@ -62,6 +67,23 @@
       right: -1px;
       height: 1.5em;
       background-color: $seagreen;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+    }
+  }
+
+  &.driver-tab {
+    border: 1px solid $gray !important;
+    &::after {
+      content: "Driver";
+      font-size: 0.8em;
+      color: white;
+      padding: 0 10px;
+      position: absolute;
+      top: -1.5em;
+      right: -1px;
+      height: 1.5em;
+      background-color: $gray;
       border-top-right-radius: 5px;
       border-top-left-radius: 5px;
     }
