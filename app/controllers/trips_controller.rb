@@ -3,9 +3,16 @@ class TripsController < ApplicationController
 
   def index
     @trips = policy_scope(Trip)
-
     filter_by_date(params[:date])
     filter_by_journey(origin: params[:from], destination: params[:to])
+    @markers = @trips.map do |trip|
+      {
+        lat: trip.start_lat,
+        lng: trip.start_lng,
+        infoWindow: render_to_string(partial: "infowindow", locals: { trip: trip }),
+        image_url: helpers.asset_url('/app/assets/images/logo.jpeg')
+      }
+    end
   end
 
   def show

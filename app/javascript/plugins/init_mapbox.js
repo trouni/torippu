@@ -1,5 +1,4 @@
 import mapboxgl from 'mapbox-gl';
-// import MapboxDirections from '@mapbox/mapbox-gl-directions';
 
 const geoapi_url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
 const url_append = '.json?access_token=pk.eyJ1Ijoib25pZ2lyaXB3IiwiYSI6ImNqdmoxN2ZnNTBidzI0MGszMWRqbzg4eWcifQ.Kq3ipy7NCPpLWqM49pyY_g'
@@ -131,16 +130,6 @@ const initMapbox = () => {
           .addTo(map);
       })
     })
-
-      // map.on('load', function() {
-      //     // ON LOAD, SET LAT and LNG
-
-      //     // WORKS IF YOU UNCOMMENT THIS
-      //     mapDirections.setOrigin(fromCoordinates)
-      //     mapDirections.setDestination(toCoordinates)
-      //     map.addControl(mapDirections, 'top-left');
-      // })
-
   }
 }
 

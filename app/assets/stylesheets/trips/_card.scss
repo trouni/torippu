@@ -7,7 +7,7 @@
 
 .card-trip {
   margin: 2em 0;
-  height: 200px;
+  // height: 150px;
   border-radius: 5px;
   background-color: white;
   border: 1px solid $light-gray;
@@ -36,7 +36,7 @@
     border: 1px solid $yellow !important;
     border-top-right-radius: 0;
     &::after {
-      content: "Pending";
+      content: "Request pending";
       font-size: 0.8em;
       color: white;
       padding: 0 10px;
@@ -53,7 +53,7 @@
   &.booking-approved {
     border: 1px solid $seagreen !important;
     &::after {
-      content: "Confirmed";
+      content: "Booking confirmed";
       font-size: 0.8em;
       color: white;
       padding: 0 10px;

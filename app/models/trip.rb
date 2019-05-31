@@ -5,6 +5,8 @@ class Trip < ApplicationRecord
   validates :end_point, presence: :true
   validates :start_time, presence: :true
   validates :seats_available, presence: :true, numericality: { only_integer: true, greater_than: 0 }
+  has_many :users, through: :bookings, source: :passenger, foreign_key: :passenger_id
+  has_many :reviews
 
   def start_date
     start_time.to_date
@@ -26,7 +28,7 @@ class Trip < ApplicationRecord
 
   geocoded_by :end_point, latitude: :end_lat, longitude: :end_lng
   geocoded_by :start_point, latitude: :start_lat, longitude: :start_lng
-  after_validation :geocode, if: :will_save_change_to_end_point?
+  after_validation :geocode_endpoints
 
   def booking?(user)
     bookings.each do |booking|
@@ -40,6 +42,14 @@ class Trip < ApplicationRecord
       return true if booking?(user) && booking.approved
     end
     return false
+  end
+
+  def users_other_than_(user)
+    if user == driver
+      users
+    else
+      users.where.not(id: user).to_a << driver
+    end
   end
 
   private

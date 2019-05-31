@@ -5,6 +5,7 @@
 ">
   <div class="row d-flex justify-content-between m-0 p-4 h-100">
     <div class="card-left d-flex flex-column justify-content-between">
+      <small class="m-0"><%= trip.start_time.strftime("%d/%m/%Y") %></small>
       <div class="card-journey d-flex flex-wrap">
         <div class="card-journey-origin mr-3"><p class="m-0"><%= trip.start_time.strftime("%H:%M") %></p><h3><%= trip.start_point %></h3></div>
         <div class="d-flex align-items-center">
@@ -25,6 +26,10 @@
           <%= cl_image_tag trip.driver.photo, gravity: "faces", crop: "fill", class: "avatar-large" %>
         <% end %>
       </div>
+      <% review = Review.new(trip: trip) %>
+      <%# if policy(review).create? %>
+        <!-- <div> <%#= link_to "Review", new_trip_review_path(trip) %></div> -->
+      <%# end %>
       <h4 class="card-price m-0">
         ¥<%= trip.price %>
       </h4>
