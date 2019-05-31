@@ -1,6 +1,8 @@
 class Trip < ApplicationRecord
   belongs_to :driver, class_name: "User"
   has_many :bookings
+  has_many :users, through: :bookings, source: :passenger, foreign_key: :passenger_id
+  has_many :reviews
 
   def start_date
     start_time.to_date
@@ -38,6 +40,13 @@ class Trip < ApplicationRecord
     return false
   end
 
+  def users_other_than_(user)
+    if user == driver
+      users
+    else
+      users.where.not(id: user).to_a << driver
+    end
+    
   private
 
   def geocode_endpoints

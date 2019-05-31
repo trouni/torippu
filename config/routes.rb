@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   resources :trips, only: [:index, :show, :new, :create, :edit, :update] do
     resources :bookings, only: [:create, :update]
+    resources :reviews, only: [:new, :create]
   end
   namespace :user do
     resources :trips, only: :index
