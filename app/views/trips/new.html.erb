@@ -1,39 +1,66 @@
-<%= render partial: "new_banner" %>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css' type='text/css' />
+<%= render partial: "shared/banner_category", locals: { title: "Create a new trip", banner_url: 'banners/driver.jpg' } %>
 
-<div class="p-5">
-  <div class="row my-5 mx-3 justify-content-center">
-    <div class="col-7 col-md-5 col-lg-7 mt-3">
 
-        <div class=" justify-content-center">
-          <%= simple_form_for [@trip] do |f| %>
-                  <div class="m-2">
-                    <p class="m-0"><strong>Pick-up and drop-off</strong></p>
-                    <div class="border p-1">
-                      <%= f.input :start_point, placeholder: 'Tokyo'%>
-                      <%= f.input :end_point, placeholder: 'Kyoto'%>
-                    </div>
-                  </div>
-                 <div class="m-2">
-                  <p class="m-0"><strong>Date & time</strong></p>
-                  <div class="border p-1">
-                  <%= f.input :start_time%>
-                  <%= f.input :end_time%>
-                  </div>
-                </div>
-                 <div class="m-2">
-                  <p class="m-0"><strong>Description</strong></p>
-                  <div class="border p-1">
-                  <%= f.input :description, placeholder: 'Tell us your stroy'%>
-                  <%= f.input :seats_available, collection: 1..10 %>
-                  <%= f.input :price, hint: 'Cheap hein ;)'%>
-                  </div>
-                </div>
-                  <%= f.submit "Let's ride!", class: 'btn btn-primary ml-2'  %>
-                  <% end %>
+<div class="row justify-content-center position-relative">
+  <div id="form-new-trip" class="col-12 col-lg-8 col-xl-6 p-3 pb-5">
+    <div class="justify-content-center">
+      <%= simple_form_for @trip do |f| %>
+      <div class="form-groups-container row d-flex align-content-between">
+
+        <div class="journey col-12 shadow" data-controller="mapbox">
+          <div class="input-group my-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">From</span>
+            </div>
+            <%= f.input :start_point, label: false, placeholder: 'The pick-up address for other passengers', wrapper_html: { class: "m-0 flex-grow-1" }, input_html: { data: { target: "mapbox.from", action2: "change->mapbox#addFromMarker" } } %>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">To</span>
+            </div>
+            <%= f.input :end_point, label: false, placeholder: 'Your destination address or city', wrapper_html: { class: "m-0 flex-grow-1" }, input_html: { data: {  target: "mapbox.to", action2: "change->mapbox#addToMarker" } } %>
+          </div>
         </div>
-    </div>
-    <div class="col-4 mt-3 d-flex  justify-content-center align-content-center border ml-5">
-      <h2>put the map and other details here</h2>
+
+        <div class="more-info col-12 shadow">
+          <div class="form-group row">
+            <div class="input-group mb-3 col-6">
+              <%= f.input :start_time, label: "Departure", wrapper_html: { class: "m-0 flex-grow-1 text-center datepicker" }, input_html: { class: "datepicker" } %>
+            </div>
+            <div class="input-group mb-3 col-6">
+              <%= f.input :end_time, label: "Arrival (est.)", wrapper_html: { class: "m-0 flex-grow-1 text-center datepicker" }, input_html: { class: "datepicker" } %>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Description</span>
+            </div>
+            <%= f.input :description, as: :text, label: false, placeholder: 'Give more information about your travel, what kind of music you like, etc.', wrapper_html: { class: "m-0 flex-grow-1" } %>
+          </div>
+          <div class="form-group row">
+            <div class="input-group mb-3 col-6">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Seats available</span>
+              </div>
+              <%= f.input :seats_available, label: false, collection: 1..8, wrapper_html: { class: "m-0 flex-grow-1" } %>
+            </div>
+            <div class="input-group mb-3 col-6">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Price</span>
+              </div>
+              <%= f.input :price, label: false, wrapper_html: { class: "m-0 flex-grow-1" } %>
+            </div>
+          </div>
+          <%= f.submit "Let's ride!", class: 'btn btn-primary w-100'  %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
+</div>
+
+<div id="map" data-controller="mapbox" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>" data-marker-from='[139.77,35.68]' data-marker-to='[135.4920315,34.69]'>
+
 </div>

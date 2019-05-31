@@ -7,20 +7,12 @@
     color: $seagreen;
     font-weight: bold;
   }
-  .booking-confirmed-false{
+  &.pending{
     background-color: $yellow-translucent;
-    padding: 8px;
   }
 
-  .booking-confirmed-true{
+  &.confirmed{
     background-color: $seagreen-translucent;
-    padding: 8px;
-  }
-
-  .card-grid-2 {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    grid-gap: 8px;
   }
 
   .applied{

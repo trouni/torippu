@@ -1,17 +1,16 @@
-<div class="card-trip border bg-white my-3 m-md-3">
-  <div class="row d-flex justify-content-center m-0 pl-5 h-100 align-items-center">
-    <div class="card-left d-flex flex-column justify-content-between">
-      <div class="card-journey">
-        <h3 class="card-journey-origin mb-0">
-          <%= trip.start_time.strftime("%H:%M") %> <small> <%= trip.start_point %>  </small>
-        </h3>
-        <div class="align-items-center">
-          <i class="fas fa-arrow-circle-down my-3"></i>
-          <h3 class="card-journey-destination">
-             <%= trip.end_time.strftime("%H:%M") %> <small> <%= trip.end_point %> </small>
-          </h3>
+<div class="journey-summary shadow col-12">
+  <h2 class="text-center"><%= trip.start_time.strftime("%a, %e %b %Y") %></h2>
+    <div class="d-flex justify-content-around mb-3 flex-wrap">
+        <div class="card-journey-origin col-12 col-lg-5">
+          <small>Departure:</small>
+          <p><%= trip.start_time.strftime("%H:%M") %></p>
+          <h3> <%= trip.start_point %>  </h3>
         </div>
-      </div>
+        <i class="fas fa-2x fa-arrow-circle-right my-3 col-12 col-lg-2"></i>
+        <div class="card-journey-destination col-12 col-lg-5">
+          <small>Arrival (est.):</small>
+          <p><%= trip.end_time.strftime("%H:%M") %></p>
+          <h3> <%= trip.end_point %> </h3>
+        </div>
     </div>
-  </div>
 </div>
