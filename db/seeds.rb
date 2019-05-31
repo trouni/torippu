@@ -3,66 +3,66 @@ require 'yaml'
 
 addresses = YAML.load_file('db/addresses.yml')
 
-USERS = [
-  {
-    username: "trouni",
-    email: "trouni@me.com",
-    photo: "https://avatars3.githubusercontent.com/u/34345789?v=4",
-    password: "secret",
-  },
-  {
-    username: "saad",
-    email: "saad@me.com",
-    photo: "https://avatars0.githubusercontent.com/u/21337523?v=4",
-    password: "secret",
-  },
-  {
-    username: "eugene",
-    email: "eugene@me.com",
-    photo: "https://avatars1.githubusercontent.com/u/49116295?v=4",
-    password: "secret",
-  },
-  {
-    username: "alex",
-    email: "alex@me.com",
-    photo: "https://avatars0.githubusercontent.com/u/48198772?v=4",
-    password: "secret",
-  },
-]
+# USERS = [
+#   {
+#     username: "trouni",
+#     email: "trouni@me.com",
+#     photo: "https://avatars3.githubusercontent.com/u/34345789?v=4",
+#     password: "secret",
+#   },
+#   {
+#     username: "saad",
+#     email: "saad@me.com",
+#     photo: "https://avatars0.githubusercontent.com/u/21337523?v=4",
+#     password: "secret",
+#   },
+#   {
+#     username: "eugene",
+#     email: "eugene@me.com",
+#     photo: "https://avatars1.githubusercontent.com/u/49116295?v=4",
+#     password: "secret",
+#   },
+#   {
+#     username: "alex",
+#     email: "alex@me.com",
+#     photo: "https://avatars0.githubusercontent.com/u/48198772?v=4",
+#     password: "secret",
+#   },
+# ]
 
-puts 'deleting reviews'
-Review.destroy_all
-puts 'Deleting bookings...'
-Booking.destroy_all
-puts 'Deleting trips...'
-Trip.destroy_all
-puts 'Deleting users...'
-User.destroy_all
+# puts 'deleting reviews'
+# Review.destroy_all
+# puts 'Deleting bookings...'
+# # Booking.destroy_all
+# puts 'Deleting trips...'
+# Trip.destroy_all
+# puts 'Deleting users...'
+# User.destroy_all
 
 
-i = 0
-100.times do
-  name = Faker::Name.name.split(" ").first
-  username = User.new(
-    username: name,
-    email: name + i.to_s + "@me.com",
-    password: "secret")
-  i += 1
-  username.remote_photo_url = "http://lorempixel.com/200/200/people/"
-  username.save!
-  print "#"
-  # create_trips(username)
-end
+# i = 0
+# 100.times do
+#   name = Faker::Name.name.split(" ").first
+#   username = User.new(
+#     username: name,
+#     email: name + i.to_s + "@me.com",
+#     password: "secret")
+#   i += 1
+#   username.remote_photo_url = "http://lorempixel.com/200/200/people/"
+#   username.save!
+#   print "#"
+#   # create_trips(username)
+# end
 
-puts ""
-puts 'Creating users...'
-USERS.each do |user_hash|
-  user = User.create!(user_hash)
-  user.remote_photo_url = user_hash[:photo]
-  user.save!
-  print "#"
-  # create_trips(user)
-end
+# puts ""
+# puts 'Creating users...'
+# USERS.each do |user_hash|
+#   user = User.create!(user_hash)
+#   user.remote_photo_url = user_hash[:photo]
+#   user.save!
+#   print "#"
+#   # create_trips(user)
+# end
 
 puts "Creating trips..."
 addresses["from"].each do |address|
