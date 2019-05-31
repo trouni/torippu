@@ -1,0 +1,12 @@
+<div class="reviews-stars">
+  <div>
+    <p>
+    <%User.rating.times do%>
+      <i class="fas fa-star"></i>
+    <% end %>
+    <%(5 - User.rating).times do%>
+      <i class="far fa-star"></i>
+    <% end %>
+    </p>
+  </div>
+</div>
