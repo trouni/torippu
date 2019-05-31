@@ -6,9 +6,8 @@ class User::TripsController < ApplicationController
     @past_trips = @trips.where("start_time < '#{DateTime.now}'")
   end
 
-  def rating
-    @passenger_rating = 0
-    @driver_rating = 0
-
-  end
+#   def rating
+#     @passenger_rating = 0
+#     @driver_rating = 0
+#   end
 end
