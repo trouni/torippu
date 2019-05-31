@@ -3,9 +3,9 @@
     <% end %>
 ">
   <div class="row d-flex justify-content-between m-0 py-3 px-4 h-100">
-    <div class="card-left d-flex flex-column justify-content-between">
+    <div class="card-left d-flex flex-column col-9 justify-content-between">
       <small class="m-0"><%#= trip.start_time.strftime("%d/%m/%Y") %></small>
-      <div class="card-journey d-flex flex-wrap">
+      <div class="card-journey d-flex flex-wrap-0">
         <div class="card-journey-origin mr-3"><p class="m-0"><%= trip.start_time.strftime("%H:%M") %></p><h3><%= trip.start_point %></h3></div>
         <div class="d-flex align-items-center">
           <i class="fas fa-arrow-circle-right mr-3"></i>
@@ -16,7 +16,7 @@
         <i class="fas fa-venus-double"></i><i class="fas fa-smoking-ban"></i>
       </div>
     </div>
-    <div class="card-right d-flex flex-column justify-content-between text-right">
+    <div class="card-right d-flex flex-wrap-0 flex-column justify-content-between text-right">
       <div class="card-driver">
         <% if current_user == trip.driver %>
           <i class="fas fa-car fa-2x driver-icon"></i>
