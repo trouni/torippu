@@ -34,6 +34,7 @@ const initMapbox = () => {
 
     var mapDirections = new MapboxDirections({
         accessToken: mapboxgl.accessToken,
+        system: 'metric',
         controls: {
             inputs: false
         },
@@ -46,7 +47,7 @@ const initMapbox = () => {
                 'line-join': 'round'
             },
             'paint': {
-                'line-color': '#8AB3F0',
+                'line-color': '#488286',
                 'line-width': 3
             },
             'filter': [
@@ -60,7 +61,7 @@ const initMapbox = () => {
             'source': 'directions',
             'paint': {
                 "circle-radius": 7,
-                "circle-color": "#8AD7B4"
+                "circle-color": "#488286"
             },
             'filter': [
                 'all',
@@ -73,7 +74,7 @@ const initMapbox = () => {
             'source': 'directions',
             'paint': {
                 "circle-radius": 7,
-                "circle-color": "#E38FB6"
+                "circle-color": "#488286"
             },
             'filter': [
                 'all',
@@ -93,8 +94,15 @@ const initMapbox = () => {
         ];
         mapDirections.setOrigin(coordinates);
         markers[0] = coordinates;
+        new mapboxgl.Marker(map)
+          .setLngLat(coordinates)
+          .addTo(map);
         fitMapToMarkers(map, markers);
-        map.addControl(mapDirections);
+
+        if (markers.length === 2) {
+          console.log(markers);
+          map.addControl(mapDirections, 'top-left');
+        }
       })
     })
 
@@ -106,14 +114,21 @@ const initMapbox = () => {
           data.features[0].geometry.coordinates[0],
           data.features[0].geometry.coordinates[1]
         ];
-        mapDirections.setDestination(coordinates);
         if (markers.length < 2) {
           markers.push(coordinates)
         } else {
           markers[1] = coordinates;
         }
-        fitMapToMarkers(map, markers);
-        map.addControl(mapDirections);
+        mapDirections.setDestination(coordinates);
+        if (markers.length === 2) {
+          console.log(markers);
+          map.addControl(mapDirections, 'top-left');
+        } else {
+          fitMapToMarkers(map, markers);
+        }
+        new mapboxgl.Marker(map)
+          .setLngLat(coordinates)
+          .addTo(map);
       })
     })
 
