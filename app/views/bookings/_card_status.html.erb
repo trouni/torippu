@@ -1,20 +1,20 @@
-<div class="booking-cart border">
+<div class="booking-cart border<%= booking.approved ? ' confirmed' : ' pending' %>">
   <div class="row">
-    <div class="mx-5 py-3 border-bottom w-100">
-    <h5>Booking status</h5>
-      <div class="booking-confirmed-<%=booking.approved%>">
+    <div class="mx-5 w-100">
+    <h4 class="text-center py-3 border-bottom">Request pending</h4>
+      <div class="">
        <% if booking.approved?%>
          <p class="p-l-3"> You are <span class="confirmed">confirmed</span> for this trip!</p>
        <% else %>
-         <p class="p-l-3"><%= @trip.driver.username %> has <span class="applied">not yet confirmed</span> your booking</p>
+         <p class="p-l-3"><%= @trip.driver.username %> hasn't approved your request yet...</p>
        <% end %>
      </div>
     </div>
   </div>
   <div class="row">
     <div class="mx-5 py-3 w-100">
-      <div class="card-grid-2 booking-confirmed-<%=booking.approved%>">
-        <p>Number of seats: <%= booking.seats_number %></p>
+      <div class="card-grid-2">
+        <p>Number of requested seats: <%= booking.seats_number %></p>
       </div>
 
     </div>
@@ -23,10 +23,9 @@
     <div class="mx-5 py-3 w-100">
       <% if policy(booking).destroy? %>
         <div>
-        <%= link_to 'cancel', booking_path(booking),
+        <%= link_to 'Cancel request', booking_path(booking),
                               method: :delete,
-                              data: { confirm: "Are you sure?" },
-                              class:"btn btn-danger w-100"%>
+                              class:"btn btn-outline-danger w-100"%>
         </div>
       <% end %>
     </div>
