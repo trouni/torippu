@@ -2,7 +2,10 @@ import mapboxgl from 'mapbox-gl';
 
 const geoapi_url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
 const url_append = '.json?access_token=pk.eyJ1Ijoib25pZ2lyaXB3IiwiYSI6ImNqdmoxN2ZnNTBidzI0MGszMWRqbzg4eWcifQ.Kq3ipy7NCPpLWqM49pyY_g'
-
+// const boarder = [
+// [128.522924, 31.350410], // Southwest coordinates
+// [146.349173, 43.461032]  // Northeast coordinates
+// ];
 const fitMapToMarkers = (map, markers) => {
   const bounds = new mapboxgl.LngLatBounds();
   markers.forEach(marker => bounds.extend([ marker[0], marker[1] ]));
@@ -27,10 +30,11 @@ const initMapbox = () => {
         container: 'map-create-trip',
         style: 'mapbox://styles/mapbox/streets-v9',
         center: [139.77,35.68],
-        zoom: 5
+        zoom: 5,
+        // maxBounds: boarder
     });
     map.addControl(new mapboxgl.NavigationControl());
-    map.scrollZoom.disable();
+    // map.scrollZoom.disable();
 
     // initialFitMapToMarkers(map, )
 
@@ -142,6 +146,7 @@ const initMapbox = () => {
     mapboxgl.accessToken = mapSearch.dataset.mapboxApiKey;
     const map = new mapboxgl.Map({
       container: 'map-search',
+      bounds: boarder,
       style: 'mapbox://styles/mapbox/streets-v10'
     });
 
