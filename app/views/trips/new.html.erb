@@ -48,9 +48,9 @@
             </div>
             <div class="input-group mb-3 col-6">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Price</span>
+                <span class="input-group-text" id="basic-addon1">¥</span>
               </div>
-              <%= f.input :price, label: false, input_html: { min: '0', step: '100' } ,wrapper_html: { class: "m-0 flex-grow-1"} %>
+              <%= f.input :price, label: false, placeholder: "price per seat", input_html: { min: '0', step: '100' } ,wrapper_html: { class: "m-0 flex-grow-1"} %>
             </div>
           </div>
           <%= f.submit "Let's ride!", class: 'btn btn-primary w-100'  %>
