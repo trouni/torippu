@@ -1,5 +1,6 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show]
+  skip_before_action :authenticate_user!, only: :index
 
   def index
     @trips = policy_scope(Trip).where('start_time >= ?', DateTime.now)
